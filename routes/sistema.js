@@ -7,7 +7,7 @@ exports.list = function(req, res){
 
   req.getConnection(function(err,connection){
        
-        var query = connection.query('SELECT * FROM customer',function(err,rows)
+        var query = connection.query('SELECT * FROM users',function(err,rows)
         {
             
             if(err)
@@ -34,7 +34,7 @@ exports.edit = function(req, res){
     
     req.getConnection(function(err,connection){
        
-        var query = connection.query('SELECT * FROM customer WHERE id = ?',[id],function(err,rows)
+        var query = connection.query('SELECT * FROM users WHERE id = ?',[id],function(err,rows)
         {
             
             if(err)
@@ -60,11 +60,12 @@ exports.save = function(req,res){
             name    : input.name,
             address : input.address,
             email   : input.email,
-            phone   : input.phone 
+            phone   : input.phone,
+            password: input.password
         
         };
         
-        var query = connection.query("INSERT INTO customer set ? ",data, function(err, rows)
+        var query = connection.query("INSERT INTO users set ? ",data, function(err, rows)
         {
   
           if (err)
@@ -92,11 +93,12 @@ exports.save_edit = function(req,res){
             name    : input.name,
             address : input.address,
             email   : input.email,
-            phone   : input.phone 
+            phone   : input.phone, 
+            password: input.password
         
         };
         
-        connection.query("UPDATE customer set ? WHERE id = ? ",[data,id], function(err, rows)
+        connection.query("UPDATE users set ? WHERE id = ? ",[data,id], function(err, rows)
         {
   
           if (err)
@@ -115,7 +117,7 @@ exports.delete_customer = function(req,res){
     
      req.getConnection(function (err, connection) {
         
-        connection.query("DELETE FROM customer  WHERE id = ? ",[id], function(err, rows)
+        connection.query("DELETE FROM users  WHERE id = ? ",[id], function(err, rows)
         {
             
              if(err)
@@ -137,9 +139,9 @@ exports.login = function(req, res){
    req.getConnection(function (err, connection) {
 
         name = req.body.name;
-        phone= req.body.phone;
+        pass = req.body.phone;
 
-        var sql="SELECT * FROM `customer` WHERE `name`='"+name+"' and phone = '"+phone+"'";    
+        var sql="SELECT * FROM `users` WHERE `name`='"+name+"' and password = '"+pass+"'";    
 
         connection.query(sql, function(err, results){      
          if(results.length){
