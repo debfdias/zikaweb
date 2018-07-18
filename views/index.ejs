@@ -1,60 +1,232 @@
-
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Zika WEB</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
 
-</head>
-<body id="clrblk">
-	<div class="container"> 
-		<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                   
-			<div class="panel panel-info" >
-				<div class="panel-heading">
-					<div class="panel-title">Entrar na plataforma</div>
-				</div>
+  <head>
 
-				<div style="padding-top:30px" class="panel-body" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-					<form id="loginform" class="form-horizontal" role="form" method="post" action="/sistema/login">
+    <title>ZikaWeb</title>
 
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-							<input id="login-username" type="text" class="form-control" name="name" value="" placeholder="login">                                       
-						</div>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" >
 
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input id="login-password" type="password" class="form-control" name="phone" placeholder="senha">
-						</div>
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli">
 
-						<div style="margin-top:10px" class="form-group">
-							<div class="col-sm-12 controls">
-								<button id="btn-login" type="submit" class="btn btn-success">Login  </button>
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="device-mockups/device-mockups.min.css">
 
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="css/new-age.min.css">
 
-							</div>
-						</div>
+  </head>
 
-						<div class="form-group">
-							<div class="col-md-12 control">
-								<div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
-									Não tem uma conta?
-									<a class="a-inside add" href="../sistema/add">Cadastrar</a>
-								</div>
-							</div>
-						</div> 
+  <body id="page-top">
 
-					</form> 
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Zika Web</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#download">Baixe Já</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#login">Entrar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
+    <header class="masthead">
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-lg-7 my-auto">
+            <div class="header-content mx-auto">
+              <h1 class="mb-5">Sua proposta é explorar o uso de tecnologias móveis com propostas de educação em saúde para enfrentamento de arboviroses, como Zika, Dengue e Chikungunya.</h1>
+              <a href="#login" class="btn btn-outline btn-xl js-scroll-trigger">Acesse Já</a>
+            </div>
+          </div>
+          <div class="col-lg-5 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div class="device">
+                  <div class="screen">
+                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                    <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
+                  </div>
+                  <div class="button">
+                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-				</div> 
+    <section class="download bg-primary text-center" id="download">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <h2 class="section-heading">Venha também fazer parte desse projeto!</h2>
+            <p>Uma visão nova para tornar o mundo seguro!</p>
+            <div class="badges">
+              <a class="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-			</div>    
+    <section class="cta">
+      <div class="cta-content">
+        <div class="container">
+          <h2>Encontre.<br>Avise.</br>Ajude.</h2>
+          <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Vamos começar!</a>
+        </div>
+      </div>
+      <div class="overlay"></div>
+    </section>
+    <!-- LOGIN -->
+    <section class="login" id="login">
+      <div class="container">
+        <div class="section-heading text-center">
+          <h2>Acesso ao Sistema Web</h2>
+          <p class="text-muted">Um sistema simples e fácil!</p>
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div class="device">
+                  <div class="screen">
+                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                    <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
+                  </div>
+                  <div class="button">
+                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 my-auto">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="feature-item">
+                    <h3>Entrar no sistema</h3>
+                    <div style="padding-top:30px" class="panel-body" >
 
-		</div>
-	</div> 
+                      <form href="#download" id="loginform" class="form-horizontal" role="form" method="post" action="/sistema/login">
+            
+                        <div style="margin-bottom: 25px" class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                          <input id="login-username" type="text" class="form-control" name="name" value="" placeholder="login">                                       
+                        </div>
+            
+                        <div style="margin-bottom: 25px" class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                          <input id="login-password" type="password" class="form-control" name="phone" placeholder="senha">
+                        </div>
+            
+                        <div style="margin-top:10px" class="form-group">
+                          <div class="col-sm-12 controls">
+                            <button id="btn-login" type="submit" class="btn btn-success">Login  </button>
+            
+            
+                          </div>
+                        </div>
+            
+                        <div class="form-group">
+                          <div class="col-md-12 control">
+                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                              Não tem uma conta?
+                              <a class="a-inside add" href="../sistema/add">Cadastrar</a>
+                            </div>
+                          </div>
+                        </div> 
+            
+                      </form> 
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</body>
+    <section class="contact bg-primary" id="contact">
+      <div class="container">
+        <h2>Entre em contato conosco!</h2>
+        <ul class="list-inline list-social">
+          <li class="list-inline-item social-twitter">
+            <a href="#">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li class="list-inline-item social-facebook">
+            <a href="#">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li class="list-inline-item social-google-plus">
+            <a href="#">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; Your Website 2018. All Rights Reserved.</p>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a href="#">Privacy</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Terms</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">FAQ</a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/js" src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/js" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script type="text/j  s" src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script type="text/js"src="js/new-age.min.js"></script>
+
+  </body>
+
 </html>
