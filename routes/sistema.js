@@ -5,28 +5,24 @@
 
 exports.list = function(req, res){
 
-  req.getConnection(function(err,connection){
-       
-        var query = connection.query('SELECT * FROM users',function(err,rows)
-        {
-            
-            if(err)
-                console.log("Error Selecting : %s ",err );
-     
-            res.render('sistema',{page_title:"sistema - Node.js",data:rows});
-                
-           
-         });
+    req.getConnection(function(err,connection){
          
-         //console.log(query.sql);
-    });
+          var query = connection.query('SELECT * FROM users',function(err,rows)
+          {
+              
+              if(err)
+                  console.log("Error Selecting : %s ",err );
+       
+              res.render('sistema',{page_title:"sistema - Node.js",data:rows});
+                  
+             
+           });
+           
+           //console.log(query.sql);
+      });
+    
+  };
   
-};
-
-exports.add = function(req, res){
-  var message = '';
-  res.render('cadastro',{page_title:"Add sistema - Node.js"});
-};
 
 exports.edit = function(req, res){
     
@@ -47,38 +43,6 @@ exports.edit = function(req, res){
          
          //console.log(query.sql);
     }); 
-};
-/*Save the customer*/
-exports.save = function(req,res){
-    
-    var input = JSON.parse(JSON.stringify(req.body));
-    
-    req.getConnection(function (err, connection) {
-        
-        var data = {
-            
-            name    : input.name,
-            address : input.address,
-            email   : input.email,
-            phone   : input.phone,
-            password: input.password
-        
-        };
-        
-        var query = connection.query("INSERT INTO users set ? ",data, function(err, rows)
-        {
-  
-          if (err)
-              console.log("Erro: %s ",err );
-         
-          console.log("sucesso!");
-          res.redirect('/');
-          
-        });
-        
-       // console.log(query.sql); get raw query
-    
-    });
 };
 
 exports.save_edit = function(req,res){

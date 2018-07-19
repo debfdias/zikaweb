@@ -10,6 +10,8 @@ var path = require('path');
 
 //load sistema route
 var sistema = require('./routes/sistema'); 
+var cadastro = require('./routes/cadastro');
+
 var session = require('express-session');
 var app = express();
 
@@ -35,6 +37,7 @@ app.use(session({
               cookie: { maxAge: 60000 }
             }))
 
+//Arquivos Estaticos
 app.use(express.static('./public'));
 
 // development only
@@ -46,6 +49,7 @@ if ('development' == app.get('env')) {
     connection peer, register as middleware
     type koneksi : single,pool and request 
 -------------------------------------------*/
+
 
 app.use(
     
@@ -62,13 +66,14 @@ app.use(
 );
 
 
-
+//URLS
 app.get('/', routes.index);
+app.get('/cadastro', cadastro.add);
+app.post('/cadastro', cadastro.save);
+
 app.get('/sistema', sistema.list);
 app.get('/sistema/login', sistema.sign);//call for login page
 app.post('/sistema/login', sistema.login);//call for login post
-app.get('/sistema/add', sistema.add);
-app.post('/sistema/add', sistema.save);
 app.get('/sistema/delete/:id', sistema.delete_customer);
 app.get('/sistema/edit/:id', sistema.edit);
 app.post('/sistema/edit/:id',sistema.save_edit);
@@ -85,8 +90,7 @@ return app;
 
 //
 //Bootstrap
-//
-
+//#region bootstrap 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var header = require('gulp-header');
@@ -213,3 +217,4 @@ gulp.task('dev', ['css', 'js', 'browserSync'], function() {
   gulp.watch('./js/*.js', ['js']);
   gulp.watch('./*.html', browserSync.reload);
 });
+//#endregion

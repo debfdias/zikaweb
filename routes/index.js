@@ -1,8 +1,8 @@
-
 /*
  * GET home page.
  */
 
+//Chamada para Tela Index
 exports.index = function(req, res){
-  res.render('index', { title: 'Hello World' });
+    res.render('app/index', { title: 'Página Inicial - ZikaWeb' });
 };
