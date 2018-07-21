@@ -18,6 +18,15 @@ var app = express();
 var connection  = require('express-myconnection'); 
 var mysql = require('mysql');
 
+var config = require('./config')
+var dbOptions = {
+  host:   config.database.host,
+  user:     config.database.user,
+  password: config.database.password,
+  port:     config.database.port, 
+  database: config.database.db
+}
+
 // all environments
 app.set('port', process.env.PORT || 4300);
 app.set('views', './views');
@@ -51,19 +60,7 @@ if ('development' == app.get('env')) {
 -------------------------------------------*/
 
 
-app.use(
-    
-    connection(mysql,{
-        
-        host: 'localhost', //'localhost',
-        user: 'root',
-        password : '',
-        port : 3306, //port mysql
-        database:'sampledb'
-
-    },'pool') //or single
-
-);
+app.use(connection(mysql, dbOptions, 'pool'));
 
 
 //URLS

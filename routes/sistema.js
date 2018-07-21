@@ -114,6 +114,7 @@ exports.login = function(req, res){
          }
          else{
             message = 'Wrong Credentials.';
+            console.log("deu ruim");
          }
                  
       });                       
