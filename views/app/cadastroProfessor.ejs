@@ -11,20 +11,20 @@
     <title>ZikaWeb</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="../../vendor/bootstrap/css/bootstrap.min.css" >
 
     <!-- Custom fonts for this template -->
-    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" type="text/css" href="../../vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../../vendor/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli">
 
     <!-- Plugin CSS -->
-    <link rel="stylesheet" type="text/css" href="device-mockups/device-mockups.min.css">
+    <link rel="stylesheet" type="text/css" href="../../device-mockups/device-mockups.min.css">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" href="css/new-age.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/new-age.min.css">
 
   </head>
 
@@ -44,6 +44,8 @@
     </nav>
     <!-- Fim Navigation -->
 
+
+
     <!-- Cadastro -->
     <section class="cadastro" id="cadastro">
         <div class="container">
@@ -59,8 +61,7 @@
                       <div style="padding-top:30px" class="panel-body" >
   
                         <form id="signupform" class="form-horizontal" role="form" method="post" action="/cadastro/professor">
-              
-                            <div class="form-group">
+                               <div class="form-group">
                                     <label for="name" class="col-md-3 control-label">Nome</label>
                                     <div class="col-md-9">
                                         <input type="text" required class="form-control" name="name" placeholder="Nome">
@@ -91,10 +92,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="school" class="col-md-3 control-label">Escola</label>
-                                    <div class="col-md-9">
-                                        <input type="text" required class="form-control" name="school" placeholder="Escola">
-                                    </div>
+                                  <label for="school" class="col-md-3 control-label">Escola</label>
+                                  <div class="col-md-9">
+                                   <select class="form-control" id="sel1" required name="schoolId">
+                                      <% for(var i=0; i < data_school.length; i++) { %>
+                                         <option value=<%= data_school[i].id %>><%= data_school[i].name %></option>
+                                      <% } %>
+                                   </select>
+                                   </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="subject" class="col-md-3 control-label">Matéria</label>
@@ -145,7 +150,7 @@
                         <div class="device">
                           <div class="screen">
                             <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                            <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
+                            <img src="../../img/demo-screen-1.jpg" class="img-fluid" alt="">
                           </div>
                           <div class="button">
                             <!-- You can hook the "home button" to some JavaScript events or just remove it -->
@@ -176,14 +181,14 @@
       </footer>
   
       <!-- Bootstrap core JavaScript -->
-      <script type="text/js" src="vendor/jquery/jquery.min.js"></script>
-      <script type="text/js" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script type="text/js" src="../../vendor/jquery/jquery.min.js"></script>
+      <script type="text/js" src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
       <!-- Plugin JavaScript -->
-      <script type="text/js" src="vendor/jquery-easing/jquery.easing.min.js"></script>
+      <script type="text/js" src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
   
       <!-- Custom scripts for this template -->
-      <script type="text/js"src="js/new-age.min.js"></script>
+      <script type="text/js"src="../../js/new-age.min.js"></script>
   
     </body>
   
