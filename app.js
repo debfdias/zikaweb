@@ -1,44 +1,61 @@
-
 /**
- * Module dependencies.
+ * ZikaWEB 
+ *
+ * @author  dfd2@cin.ufpe.br
+ * @version 1.0
  */
 
+//Dependencies
 var express = require('express');
 var routes = require('./routes');
-var http = require('http');
 var path = require('path');
-
-//load sistema route
-var sistema = require('./routes/sistema'); 
-var cadastro = require('./routes/cadastro');
-
+var cookieParser = require('cookie-parser');// cookie parser is tied into express sessions and passport to provide user session experience
+var morgan = require('morgan'); // allows server to print all requests made and display on console window.
 var session = require('express-session');
-var app = express();
-
+var session = require('express-session');
 var connection  = require('express-myconnection'); 
+var passport = require('passport');
+var flash = require('connect-flash');
 var mysql = require('mysql');
 
+
+var app = express();
+var server = require('http').createServer(app);
+var port = process.env.PORT || 4300;
 var config = require('./config')
 var dbOptions = {
-  host:   config.database.host,
+  host:     config.database.host,
   user:     config.database.user,
   password: config.database.password,
   port:     config.database.port, 
   database: config.database.db
 }
 
+const testmode = false; // if true the system would lock your ipaddress for 1 minute if you make 3 requests within 10 seconds, else if false the system would lock your ipaddress for 20 minutes if you make 13 requests in 10 minutes
+const parameters = testmode ?
+{
+  minutesLocked: 1, // lock your ip address for 1 minute
+  windowMs: 10*1000, // the brute force limit is 10 seconds for 3 request
+  max: 2,
+
+}
+:
+{
+  minutesLocked: 20, // lock your ip address for 13 minutes
+  windowMs: 10*60*1000, // the brute force limit is 10 minutes for 13 request
+  max: 12,
+}
+
 // all environments
-app.set('port', process.env.PORT || 4300);
 app.set('views', './views');
 app.set('view engine', 'ejs');
-
-
 
 //app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(cookieParser());
 app.use(session({
               secret: 'keyboard cat',
               resave: false,
@@ -46,44 +63,45 @@ app.use(session({
               cookie: { maxAge: 60000 }
             }))
 
-//Arquivos Estaticos
+
+app.use(passport.initialize());
+app.use(passport.session()); // passport uses the previous session  declared to piggy back off of
+app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(connection(mysql, dbOptions, 'pool'));
+app.use(app.router);
 app.use(express.static('./public'));
 
-// development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-/*------------------------------------------
-    connection peer, register as middleware
-    type koneksi : single,pool and request 
--------------------------------------------*/
-
-
-app.use(connection(mysql, dbOptions, 'pool'));
+//ROUTES
+require('./routes/passport')(passport, parameters); //passport auth
+require('./routes/sistema')(app, passport, parameters); //login,edit,delet,logout
+require('./routes/cadastro')(app, passport); //signin
 
 
 //URLS
 app.get('/', routes.index);
-app.get('/cadastro', cadastro.add);
-app.post('/cadastro', cadastro.save);
 
-app.get('/sistema', sistema.list);
-app.get('/sistema/login', sistema.sign);//call for login page
-app.post('/sistema/login', sistema.login);//call for login post
-app.get('/sistema/delete/:id', sistema.delete_customer);
-app.get('/sistema/edit/:id', sistema.edit);
-app.post('/sistema/edit/:id',sistema.save_edit);
-app.get('/sistema/logout', sistema.logout);//call for logout
+//SERVER
+server.listen(port, () => {
+    var mes = server.address().port;
+    console.log('Server is listening at %s', ": " + mes);
+});
 
-
-app.use(app.router);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-})
 return app;
 ;
+
+
+
+
+
+
+
+
+
+
 
 //
 //Bootstrap

@@ -50,8 +50,11 @@
               <a class="nav-link js-scroll-trigger" href="#login">Entrar</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="/cadastro">Cadastrar</a>
-              </li>
+                <a class="nav-link js-scroll-trigger" href="/cadastro/professor">Cadastro Professor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/cadastro/estudante">Cadastro Aluno</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -140,18 +143,22 @@
                 <div class="col-lg-12">
                   <div class="feature-item">
                     <h3>Entrar no sistema</h3>
+
+                    <% if (locals.message) { %>
+                        <div class="alert alert-danger"><%=message.loginMessage%></div>
+                    <% } %>
                     <div style="padding-top:30px" class="panel-body" >
 
                       <form id="loginform" class="form-horizontal" role="form" method="post" action="/sistema/login">
             
                         <div style="margin-bottom: 25px" class="input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                          <input id="login-username" type="text" class="form-control" name="name" value="" placeholder="login">                                       
+                          <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="email">                                       
                         </div>
             
                         <div style="margin-bottom: 25px" class="input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                          <input id="login-password" type="password" class="form-control" name="phone" placeholder="senha">
+                          <input id="login-password" type="password" class="form-control" name="password" placeholder="senha">
                         </div>
             
                         <div style="margin-top:10px" class="form-group">
@@ -166,7 +173,7 @@
                           <div class="col-md-12 control">
                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                               Não tem uma conta?
-                              <a class="a-inside add" href="../sistema/add">Cadastrar</a>
+                              <a class="a-inside add" href="/cadastro">Cadastrar</a>
                             </div>
                           </div>
                         </div> 

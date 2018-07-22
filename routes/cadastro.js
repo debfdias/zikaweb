@@ -1,40 +1,50 @@
-//
-//CADASTRO
-//
+/**
+ * ZikaWEB 
+ *
+ * @author  dfd2@cin.ufpe.br
+ * @version 1.0
+ */
 
-exports.add = function(req, res){
-  var message = '';
-  res.render('app/cadastro',{page_title:"Add sistema - Node.js"});
-};
+ module.exports = function(app, passport, parameters) {
 
-exports.save = function(req,res){
-    
-    var input = JSON.parse(JSON.stringify(req.body));
-    
-    req.getConnection(function (err, connection) {
-        
-        var data = {
-            
-            name    : input.name,
-            address : input.address,
-            email   : input.email,
-            phone   : input.phone,
-            password: input.password
-        
-        };
-        
-        var query = connection.query("INSERT INTO users set ? ",data, function(err, rows)
-        {
-  
-          if (err)
-              console.log("Erro: %s ",err );
-         
-          console.log("sucesso!");
-          res.redirect('/');
-          
-        });
-        
-       // console.log(query.sql); get raw query
-    
-    });
-};
+  app.get('/cadastro/professor', isNotLoggedIn, function(req, res){
+    var message = '';
+
+    res.locals.message = req.flash('registerMessage');
+    res.render('app/cadastroProfessor',{page_title:"Add sistema - Node.js"});
+  });
+
+  app.post('/cadastro/professor', passport.authenticate('local-signup-prof', {
+    successRedirect: '/', 
+    failureRedirect: '/', 
+    failureFlash: true // allow flash messages
+  }));
+
+  app.get('/cadastro/estudante', isNotLoggedIn, function(req, res){
+    var message = '';
+
+    res.locals.message = req.flash('registerMessage');
+    res.render('app/cadastroEstudante',{page_title:"Add sistema - Node.js"});
+  });
+
+  app.post('/cadastro/estudante', passport.authenticate('local-signup-std', {
+    successRedirect: '/', 
+    failureRedirect: '/', 
+    failureFlash: true // allow flash messages
+  }));
+
+
+
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+    res.redirect('/');
+  }
+
+  function isNotLoggedIn(req, res, next) {
+    if (!req.isAuthenticated())
+      return next();
+    res.redirect('/sistema');
+  }
+
+}
