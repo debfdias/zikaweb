@@ -12,7 +12,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');// cookie parser is tied into express sessions and passport to provide user session experience
 var morgan = require('morgan'); // allows server to print all requests made and display on console window.
 var session = require('express-session');
-var session = require('express-session');
 var connection  = require('express-myconnection'); 
 var passport = require('passport');
 var flash = require('connect-flash');

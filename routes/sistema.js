@@ -12,11 +12,12 @@ module.exports = function(app, passport, parameters) {
 
         var query = connection.query('SELECT * FROM users',function(err,rows)
         {
+          var user = req.user;
 
           if(err)
             console.log("Error Selecting : %s ",err );
 
-          res.render('sistema',{page_title:"sistema - Node.js",data:rows});
+          res.render('sistema',{page_title:"sistema - Node.js",data:rows,user});
 
         });
       });
@@ -44,15 +45,40 @@ module.exports = function(app, passport, parameters) {
 
        req.getConnection(function (err, connection) {
 
-          connection.query("DELETE FROM users  WHERE id = ? ",[id], function(err, rows)
+        connection.query('SELECT * FROM users where id=?',[id],function(err,rows){
+          var email = rows[0].email;
+          var type  = rows[0].type;
+          console.log(email)
+
+          if(isAdmin(req,res)){
+            connection.query("DELETE FROM users  WHERE id = ? ",[id], function(err, rows)
+            {
+              if (type==2)
+              {
+                connection.query("DELETE FROM teachers  WHERE email = ? ",[email], function(err, rows)
+                {
+                  if(err)
+                    console.log("Error deleting : %s ",err );
+                  res.redirect('/sistema');
+                });
+              }
+              else if(type==1)
+              {
+                connection.query("DELETE FROM students  WHERE email = ? ",[email], function(err, rows)
+                {
+                  if(err)
+                    console.log("Error deleting : %s ",err );
+                  res.redirect('/sistema');
+                });
+              }
+           });
+          }
+          else
           {
-            if(err)
-              console.log("Error deleting : %s ",err );
-
-            res.redirect('/sistema');
-
-         });
-
+            console.log("apenas admins podem deletar");
+            res.redirect('sistema');
+          }
+        });
       });
 
     });
@@ -81,22 +107,58 @@ module.exports = function(app, passport, parameters) {
 
       req.getConnection(function (err, connection) {
 
-        var data = {
 
-          name    : input.name,
-          address : input.address,
-          email   : input.email,
-          phone   : input.phone, 
-          password: input.password
+        if(req.user.id == id) //usuario logado modifica o seu proprio perfil
+        {
+          var data = {
 
-        };
+            name    : input.name,
+            email   : input.email
+          };
 
-        connection.query("UPDATE users set ? WHERE id = ? ",[data,id], function(err, rows) {
-          if (err)
-            console.log("Error Updating : %s ",err );
+          if(isTeacher(req,res))
+          {
+            connection.query("UPDATE users set ? WHERE id = ? ",[data,id], function(err, rows) {
+              if (err)
+                console.log("Error Updating : %s ",err );
+
+              connection.query("UPDATE teachers set ? WHERE email = ? ",[data,req.user.email], function(err2, rows2) {
+                if (err2)
+                  console.log("Error Updating : %s ",err2 );
+                console.log("editado professor")
+                res.redirect('/sistema');
+              });
+              
+            });
+          }
+          else if(isStudent(req,res))
+          {
+            connection.query("UPDATE users set ? WHERE id = ? ",[data,id], function(err, rows) {
+              if (err)
+                console.log("Error Updating : %s ",err );
+
+              connection.query("UPDATE students set ? WHERE email = ? ",[data,req.user.email], function(err2, rows2) {
+                if (err2)
+                  console.log("Error Updating : %s ",err2 );
+                console.log("editado estudante")
+                res.redirect('/sistema');
+              });
+              
+            });            
+          }
+
+        }
+        else
+        {/*
+          connection.query('SELECT * FROM teachers where email=?',[req.user.email],function(err,rows){
+            console.log(rows[0]);
+
+          });*/
+
+          console.log("voce nao tem permissao para alterar dados");
+          
           res.redirect('/sistema');
-
-        });
+        }
     
       });
 
@@ -119,6 +181,30 @@ module.exports = function(app, passport, parameters) {
         if (!req.isAuthenticated())
             return next();
         res.redirect('/sistema');
+    }
+
+    function isStudent(req,res)
+    {
+      if(req.user.type == 1)
+        return true;
+      else
+        return false;
+    }
+
+    function isTeacher(req,res)
+    {
+      if (req.user.type == 2)
+        return true;
+      else
+        return false;
+    }
+
+    function isAdmin (req,res) 
+    {
+      if (req.user.type == 0)
+        return true;
+      else
+        return false;
     }
 
 }
