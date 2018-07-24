@@ -1,5 +1,6 @@
 var config = {
 	database: {
+		multipleStatements: true,
 		host:	  'localhost', 	// database host
 		user: 	  'root', 		// your database username
 		password: '', 		// your database password

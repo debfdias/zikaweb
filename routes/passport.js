@@ -210,7 +210,13 @@ module.exports = function(passport, parameters) {
                               connection.release();
                               return done(err);
                             }
-                            console.log("deu bom pro stu");
+                              connection.query("UPDATE schools SET num_students = num_students+1 WHERE id = ? ",[newUserMysql.schoolId], function(err, rows)
+                              {
+                                  console.log("deu bom pro stu");
+
+                              });
+
+                            
                           });
                     
                       }

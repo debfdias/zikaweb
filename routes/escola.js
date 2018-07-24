@@ -142,9 +142,14 @@ module.exports = function(app, passport) {
 	            city_id  : 1,
 	            state_id : input.stateId,
 	            points   : 0,
-	            token    : 'null'
+	            token    : 'null',
+              num_students : 0,
+              num_teachers : 0
 
 	        };
+
+          if(isTeacher(req,res))
+            data.num_teachers++;
 
 	        	connection.query("INSERT INTO schools set ?",[data], function(err,rows1){
 	        		if(err)

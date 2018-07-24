@@ -11,12 +11,42 @@
  		req.getConnection(function (err,connection){
  			if(isAdmin(req,res))
  			{
- 				connection.query('SELECT * FROM users WHERE auth = ? and type = ?', [0, 2], function(err,rows){
-          if(err)
-            console.log("Error Selecting : %s ", err );
-          res.render('adminPanel', {page_title:"sistema - Node.js", data:rows});
-        });
- 			}
+ 				connection.query('SELECT * FROM users WHERE auth = ? and type = ?', [0, 2], function(err,rows_){
+         var email = '';
+
+         if(rows_.length>0)
+         {
+             for(var i=0; i<rows_.length;i++)
+             {
+                email += "'" + rows_[i].email+ "',";
+             }
+
+             email = email.substring(0,email.length-1);
+
+             connection.query('SELECT * FROM teachers WHERE email IN (' + email + ')', function(err,rows){
+                  if(err)
+                  {
+                    console.log("Error Selecting : %s ", err );
+                  }
+                  else
+                  {
+                    connection.query('SELECT * from schools', function(err,rows2){
+                      if(err)
+                        console.log("Error Selecting : %s ", err );
+                      res.render('adminPanel', {page_title:"sistema - Node.js", user:rows_, data:rows, school:rows2});
+
+                    });
+
+                  }
+
+              });
+          }
+          else
+          {
+            res.render('adminPanel', {page_title:"sistema - Node.js", user:rows_});
+          }
+        });      
+      }
  			else
  			{
  				console.log("nao autorizado");
@@ -59,23 +89,38 @@
 
  });
 
-  app.get('/admin/accept/:id', isLoggedIn, function(req, res) {
+  app.get('/admin/accept/:id',isLoggedIn, function(req, res) {
 
    var id = req.params.id;
 
    req.getConnection(function (err, connection) {
-     var data = {
-
-       auth    : 1
-     };
 
      if(isAdmin(req,res)){
-      connection.query("UPDATE users set ? WHERE id = ? ",[data, id], function(err, rows)
+      connection.query("SELECT * from users WHERE id = ? ",[id], function(err, rows)
       {
-        if(err)
-          console.log("Error deleting : %s ",err );
-        else
-          console.log("professor aprovado");
+        var email = rows[0].email;
+        connection.query("SELECT * FROM teachers WHERE email = ? ",[email], function(err2, rows2)
+        {
+          if(err2)
+            console.log("Error deleting : %s ",err2 );
+
+          var school_id = rows2[0].school_id;
+
+              connection.query("UPDATE schools SET num_teachers = num_teachers+1 WHERE id = ? ",[school_id], function(err, rows)
+              {
+
+                connection.query("UPDATE users SET auth = 1 WHERE id = ? ",[id], function(err, rows)
+                {
+                  if(err)
+                    console.log("Error deleting : %s ",err );
+                  else
+                    console.log("professor aprovado e adicionado na escola");
+
+                });
+
+              });
+
+          });
 
         res.redirect('/sistema');
       });

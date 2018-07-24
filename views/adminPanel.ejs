@@ -57,15 +57,19 @@
                       <h3>ADMIN PAINEL</h3>
                       
                       <div style="padding-top:30px" class="panel-body" >
-                        <table border="1" cellpadding="7" cellspacing="7">
+                        <table border="1" cellpadding="7" cellspacing="10">
                             <tr>
                                 <th width="100px">No</th>
-                                <th>Name</th>
+                                <th>Nome</th>
                                 <th>Email</th>
-                                <th width="200px">Action</th>
+                                <th>Telefone</th>
+                                <th>CPF</th>
+                                <th width="150">Escola</th>
+                                <th>Matéria</th>
+                                <th width="300px">Ação</th>
                             </tr>
                                            
-                            <% if(data.length){ 
+                            <% if(user.length){ 
                                             
                              for(var i = 0;i < data.length;i++) { %>
                              
@@ -73,10 +77,24 @@
                                 <td><%=(i+1)%></td>
                                 <td><%=data[i].name%></td>
                                 <td><%=data[i].email%></td>
+                                <td><%=data[i].phone%></td>
+                                <td><%=data[i].cpf%></td>
+                                <% if (data[i].school_id == 1)
+                                  {
+                                    var j = data[i].school_id;
+                                  }
+                                  else
+                                    {
+                                      var j = data[i].school_id - 1;
+                                    }
+
+                                %>
+                                <td><%=school[j].name%></td>
+                                <td><%=data[i].subject%></td>
                                 <td>
-                                    <a class="a-inside edit" href="../admin/accept/<%=data[i].id%>">aprovar</a>
+                                    <a class="a-inside edit" href="../admin/accept/<%=user[i].id%>">aprovar</a>
                                    
-                                    <a class="a-inside delete" href="../admin/refuse/<%=data[i].id%>">desaprovar</a>
+                                    <a class="a-inside delete" href="../admin/refuse/<%=user[i].id%>">desaprovar</a>
                                    
                                 </td>
                             </tr>
@@ -84,15 +102,18 @@
                         
                          }else{ %>
                              <tr>
-                                <td colspan="3">No user</td>
+                                <td colspan="8">Sem pendencias</td>
                              </tr>
                         <% } %>
                             
                                           
                             
                         </table>
+
+
                     </div>
                   </div>
+                  <a class="btn btn-info" href="../sistema">voltar</a>
                  
                 </div>
               </div>
