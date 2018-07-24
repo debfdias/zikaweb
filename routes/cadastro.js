@@ -13,8 +13,8 @@
     const queryStates  = "select * from states";
     const queryProfiles= "select * from profiles";
 
-    req.getConnection(function(err,connection){
-      connection.query(queryStates,function(err,rows1)
+    req.getConnection(function (err,connection){
+      connection.query(queryStates,function (err,rows1)
       {
 
         if(err)
@@ -22,7 +22,6 @@
 
         connection.query(queryProfiles,function(err,rows2)
         {
-
           res.render('app/cadastro',{page_title:"sistema - Node.js", data_state:rows1, data_profiles:rows2});
         });
 
@@ -34,6 +33,7 @@
 
     //const input    = req.body;
     var input = JSON.parse(JSON.stringify(req.body));
+    console.log(input)
 
     req.getConnection(function (err, connection) {
 

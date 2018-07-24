@@ -13,12 +13,33 @@ module.exports = function(app, passport, parameters) {
         var query = connection.query('SELECT * FROM users',function(err,rows)
         {
           var user = req.user;
+          var email= req.user.email;
 
-          if(err)
-            console.log("Error Selecting : %s ",err );
+          if(isTeacher(req,res))
+          {
+            connection.query('SELECT * FROM teachers where email=?',[email],function(err,rows_teacher){
+              if(err)
+                console.log("Error Selecting : %s ",err );
 
-          res.render('sistema',{page_title:"sistema - Node.js",data:rows,user});
+              res.render('sistema',{page_title:"sistema - Node.js",data:rows,user,data_teacher:rows_teacher});
 
+            });
+
+          }
+          else if(isStudent(req,res))
+          {
+            connection.query('SELECT * FROM students where email=?',[email],function(err,rows_student){
+              if(err)
+                console.log("Error Selecting : %s ",err );
+
+              res.render('sistema',{page_title:"sistema - Node.js",data:rows,user,data_student:rows_student});
+
+            });
+          }
+          else
+          {
+            res.render('sistema',{page_title:"sistema - Node.js",data:rows,user});
+          }
         });
       });
     });
@@ -59,6 +80,8 @@ module.exports = function(app, passport, parameters) {
                 {
                   if(err)
                     console.log("Error deleting : %s ",err );
+                  else
+                    console.log("professor deletado")
                   res.redirect('/sistema');
                 });
               }
@@ -68,6 +91,8 @@ module.exports = function(app, passport, parameters) {
                 {
                   if(err)
                     console.log("Error deleting : %s ",err );
+                  else
+                    console.log("aluno deletado")
                   res.redirect('/sistema');
                 });
               }
@@ -76,7 +101,7 @@ module.exports = function(app, passport, parameters) {
           else
           {
             console.log("apenas admins podem deletar");
-            res.redirect('sistema');
+            res.redirect('/sistema');
           }
         });
       });
@@ -88,6 +113,9 @@ module.exports = function(app, passport, parameters) {
 
       req.getConnection(function(err,connection){
 
+
+      if(req.user.id == id) //usuario logado modifica o seu proprio perfil
+      {
         var query = connection.query('SELECT * FROM users WHERE id = ?',[id],function(err,rows)
         {
           if(err)
@@ -95,7 +123,12 @@ module.exports = function(app, passport, parameters) {
 
           res.render('edit',{page_title:"Edit sistema - Node.js",data:rows});
         });
-         //console.log(query.sql);
+       }
+       else
+       {
+        console.log("voce nao tem permissao pra editar outro perfil alem do seu");
+        res.redirect('/sistema');
+       }
       }); 
 
     });
@@ -107,9 +140,6 @@ module.exports = function(app, passport, parameters) {
 
       req.getConnection(function (err, connection) {
 
-
-        if(req.user.id == id) //usuario logado modifica o seu proprio perfil
-        {
           var data = {
 
             name    : input.name,
@@ -147,18 +177,7 @@ module.exports = function(app, passport, parameters) {
             });            
           }
 
-        }
-        else
-        {/*
-          connection.query('SELECT * FROM teachers where email=?',[req.user.email],function(err,rows){
-            console.log(rows[0]);
-
-          });*/
-
-          console.log("voce nao tem permissao para alterar dados");
-          
-          res.redirect('/sistema');
-        }
+        
     
       });
 

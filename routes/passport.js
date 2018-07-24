@@ -82,7 +82,7 @@ module.exports = function(passport, parameters) {
                 newUserMysql.subject  = input.subject;
                 newUserMysql.password = input.password; 
                 newUserMysql.email    = input.email; 
-                newUserMysql.auth     = 1;
+                newUserMysql.auth     = 0;
                 newUserMysql.type     = 2;
 
 

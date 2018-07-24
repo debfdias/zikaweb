@@ -77,7 +77,9 @@ if ('development' == app.get('env')) {
 //ROUTES
 require('./routes/passport')(passport, parameters); //passport auth
 require('./routes/sistema')(app, passport, parameters); //login,edit,delet,logout
-require('./routes/cadastro')(app, passport); //signin
+require('./routes/cadastro')(app, passport, parameters); //signin
+require('./routes/escola')(app, passport); 
+require('./routes/admin')(app, passport); 
 
 
 //URLS
