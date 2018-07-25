@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Jul-2018 às 02:06
+-- Generation Time: 25-Jul-2018 às 04:04
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `sampledb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `activities`
+--
+
+CREATE TABLE IF NOT EXISTS `activities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `points` int(11) NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `activities`
+--
+
+INSERT INTO `activities` (`id`, `name`, `description`, `points`, `active`) VALUES
+(2, 'Caçando moscas lindas', 'Você vai ter que fazer um monte de coisa', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -66,18 +88,26 @@ CREATE TABLE IF NOT EXISTS `schools` (
   `state_id` int(11) NOT NULL,
   `points` int(10) NOT NULL,
   `token` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `num_students` int(11) NOT NULL,
+  `num_teachers` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 --
 -- Extraindo dados da tabela `schools`
 --
 
-INSERT INTO `schools` (`id`, `name`, `city_id`, `state_id`, `points`, `token`) VALUES
-(1, 'Escola das Pitombas', 1, 2, 50, 'pitombeira'),
-(2, 'Escola Estadual Bigornas Místicas', 2, 3, 100, 'arara'),
-(3, 'Escola dos Raios Ultravioletas', 2, 2, 0, 'violeta'),
-(4, 'Escola Municial Água Boa', 1, 1, 20, 'aguinha');
+INSERT INTO `schools` (`id`, `name`, `city_id`, `state_id`, `points`, `token`, `num_students`, `num_teachers`) VALUES
+(1, 'Escola das Pitombas', 1, 2, 50, 'pitombeira', 1, 1),
+(2, 'Escola Estadual Bigornas Místicas', 2, 3, 40, 'arara', 1, 0),
+(3, 'Escola dos Raios Ultravioletas', 2, 2, 120, 'violeta', 1, 0),
+(4, 'Escola Municipal Água Boa dos Milagres ', 1, 1, 20, 'aguinha rasa', 0, 0),
+(5, 'escola vincente sabugosa', 1, 11, 0, 'sabugo', 0, 0),
+(6, 'Escola dos Jumentos do Sertão', 1, 5, 0, 'null', 1, 1),
+(7, 'Jubileu de Ouro', 1, 6, 0, 'ouro', 0, 0),
+(8, 'Miralogia Federal', 1, 2, 0, 'null', 0, 0),
+(14, 'Recife de Corais', 1, 1, 200, 'alem', 2, 0),
+(15, 'Escola de Casa Forte', 1, 7, 0, 'null', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -146,18 +176,23 @@ CREATE TABLE IF NOT EXISTS `students` (
   `nc_celpe` int(10) NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `points` int(11) NOT NULL,
+  `current_act` int(11) NOT NULL,
+  `finished_act` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
 -- Extraindo dados da tabela `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `token`, `year`, `name_family`, `cpf_family`, `nc_celpe`, `email`, `password`) VALUES
-(5, 'george h. weasley', 'a toca', '05/09/1990', '111111', '222222', 3, 'violeta', 1, 'molly', '4444', 331, 'george', '123'),
-(6, 'fred weasley', 'a toca', '18/07/1986', '11111', '2222233', 2, 'arara', 3, 'arthur', '434343432', 231120983, 'fred', '123'),
-(7, 'caio', 'caixeda', '18/07/1989', '4444', '5555', 4, 'aguinha', 1, 'vitor', '22222', 44556, 'caio', '123'),
-(8, 'jubileu', 'avenida das palmas', '12/03/1956', '1', '2', 1, 'pitombeira', 3, 'joca', '2', 343, 'jubi', '123');
+INSERT INTO `students` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `token`, `year`, `name_family`, `cpf_family`, `nc_celpe`, `email`, `password`, `points`, `current_act`, `finished_act`) VALUES
+(5, 'george h. weasley', 'a toca', '05/09/1990', '111111', '222222', 3, 'violeta', 1, 'molly', '4444', 331, 'george', '123', 120, 2, 2),
+(6, 'fred henrique weasley', 'a toca', '18/07/1986', '11111', '2222233', 2, 'arara', 3, 'arthur', '434343432', 231120983, 'fred', '123', 40, 2, 2),
+(8, 'jubileu', 'avenida das palmas', '12/03/1956', '1', '2', 1, 'pitombeira', 3, 'joca', '2', 343, 'jubi', '123', 0, 0, 0),
+(9, 'juliano silva', 'travessia do monte', '05/09/1990', '454645646', '45456564', 6, 'sabugo', 2, 'maria', '121321313', 2313213, 'juliano', '123', 0, 0, 0),
+(10, 'arnaldo', 'a', '12/03/1956', '1', '2', 14, 'alem', 1, 'b', '2', 0, 'a', '123', 200, 0, 0),
+(11, 'bruno', 'b', '12/03/1956', '1', '2', 14, 'alem', 1, 'a', '1', 9, 'b', '123', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -177,17 +212,15 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Extraindo dados da tabela `teachers`
 --
 
 INSERT INTO `teachers` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `subject`, `email`, `password`) VALUES
-(2, 'joao do santos', 'do beco estrelado', '02/07/1970', '454646', '46454', 2, 'blok', 'jo', '123'),
-(3, 'renan', 'avenida dos montes', '08/12/1987', '121212', '131313', 3, 'geografia', 'ren', '123'),
-(11, 'pacov', 'Hochstraße', '12/03/1956', '4443', '2121', 4, 'bigu', 'paco', '123'),
-(12, 'jatoba', 'minitoba', '12/03/1956', '11111', '22222', 4, 'okokoko', 'jato', '123');
+(11, 'pacov', 'Hochstraße', '12/03/1956', '4443', '2121', 1, 'bigu', 'paco', '123'),
+(13, 'janio pereira', 'avacasa', '18/07/1986', '454665', '464645', 6, 'biologia', 'janio', '123');
 
 -- --------------------------------------------------------
 
@@ -203,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `auth` tinyint(1) DEFAULT '0',
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
 --
 -- Extraindo dados da tabela `users`
@@ -211,15 +244,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `auth`, `type`) VALUES
 (11, 'fabio zloccowick', 'fabs', '22', 1, 0),
-(31, 'debs', 'debas', '123', 1, 0),
+(31, 'debs', 'de', '123', 1, 0),
 (54, 'george h. weasley', 'george', '123', 1, 1),
-(55, 'fred weasley', 'fred', '123', 1, 1),
+(55, 'fred henrique weasley', 'fred', '123', 1, 1),
 (56, 'pacov', 'paco', '123', 1, 2),
-(58, 'joao do santos', 'jo', '123', 1, 2),
-(59, 'renan', 'ren', '123', 1, 2),
-(60, 'caio', 'caio', '123', 1, 1),
-(61, 'jatoba', 'jato', '123', 0, 2),
-(62, 'jubileu', 'jubi', '123', 1, 1);
+(62, 'jubileu', 'jubi', '123', 1, 1),
+(63, 'janio pereira', 'janio', '123', 0, 2),
+(64, 'juliano silva', 'juliano', '123', 1, 1),
+(65, 'arnaldo', 'arns', '123', 1, 1),
+(66, 'bruno', 'bru', '123', 1, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -168,6 +168,8 @@ module.exports = function(passport, parameters) {
                 newUserMysql.email    = input.email; 
                 newUserMysql.auth     = 1;
                 newUserMysql.type     = 1;
+                newUserMysql.points   = 0;
+                newUserMysql.activityId = 0;
 
                 mysqlpool.getConnection(function(err, connection){
                   connection.query("select * from schools where id = ?",[newUserMysql.schoolId],function(err,rows){
@@ -201,10 +203,11 @@ module.exports = function(passport, parameters) {
                             return done(null, newUserMysql);
                           });
 
-                          const insertStudent = "insert into students (name, address, birth, phone, cpf, school_id, token, year, name_family, cpf_family, nc_celpe, email, password) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                          const insertStudent = "insert into students (name, address, birth, phone, cpf, school_id, token, year, name_family, cpf_family, nc_celpe, email, password, points, current_act) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                           connection.query(insertStudent,[newUserMysql.username, newUserMysql.address, newUserMysql.birth, 
                             newUserMysql.phone, newUserMysql.cpf, newUserMysql.schoolId, newUserMysql.token, 
-                            newUserMysql.year, newUserMysql.nameFml, newUserMysql.cpfFml, newUserMysql.ncCelpe, newUserMysql.email, newUserMysql.password],function(err,result){
+                            newUserMysql.year, newUserMysql.nameFml, newUserMysql.cpfFml, newUserMysql.ncCelpe, 
+                            newUserMysql.email, newUserMysql.password, newUserMysql.points, newUserMysql.activityId],function(err,result){
                             if (err)
                             {
                               connection.release();

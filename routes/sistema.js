@@ -21,7 +21,7 @@ module.exports = function(app, passport, parameters) {
               if(err)
                 console.log("Error Selecting : %s ",err );
 
-              res.render('sistema',{page_title:"sistema - Node.js",data:rows,user,data_teacher:rows_teacher});
+              res.render('sistema',{page_title:"sistema - Node.js",data0:rows,user,data:rows_teacher});
 
             });
 
@@ -32,15 +32,39 @@ module.exports = function(app, passport, parameters) {
               if(err)
                 console.log("Error Selecting : %s ",err );
 
-              res.render('sistema',{page_title:"sistema - Node.js",data:rows,user,data_student:rows_student});
+              res.render('sistema',{page_title:"sistema - Node.js",data0:rows,user,data:rows_student});
 
             });
           }
           else
           {
-            res.render('sistema',{page_title:"sistema - Node.js",data:rows,user});
+            res.render('sistema',{page_title:"sistema - Node.js",data0:rows,user});
           }
         });
+      });
+    });
+
+    app.get('/sistema/perfil', isLoggedIn, function(req, res) {
+      req.getConnection(function(err,connection){
+        var email= req.user.email;
+        if(isStudent(req,res))
+        {
+          connection.query('SELECT * FROM students where email=?',[email],function(err,rows_student){
+            if(err)
+                console.log("Error Selecting : %s ",err );
+            //else
+                //res.render('estudante', {page_title:"estudante", student:rows_student});
+          });
+        }
+        else if(isTeacher(req,res))
+        {
+          connection.query('SELECT * FROM teachers where email=?',[email],function(err,rows_teacher){
+            if(err)
+                console.log("Error Selecting : %s ",err );
+            //else
+                //res.render('professor', {page_title:"estudante", teacher:rows_teacher});
+          });
+        }
       });
     });
 

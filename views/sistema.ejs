@@ -5,8 +5,14 @@
            <button onClick="addUser();">+ Add</button>
            <a class="a-inside edit" href="../escola/cadastro">add escola</a>
 
-           <a class="a-inside delete" href="../sistema/logout">logout</a>
+
+           <a class="a-inside edit" href="../ranking/escolas">ranking escola</a>
+           <a class="a-inside edit" href="../ranking/estudantes">ranking estudantes</a>
+
+           <a class="a-inside edit" href="../atividade/cadastro">add atividade</a>
            <a class="a-inside edit" href="../admin/pendentes">panel</a>
+           <a class="a-inside delete" href="../sistema/logout">logout</a>
+           
          </div>
 
          <div class="data-table">
@@ -26,20 +32,20 @@
                     <th width="120px">Action</th>
                 </tr>
                                
-                <% if(data.length){ 
+                <% if(data0.length){ 
                                 
-                 for(var i = 0;i < data.length;i++) { %>
+                 for(var i = 0;i < data0.length;i++) { %>
                  
                 <tr>
                     <td><%=(i+1)%></td>
-                    <td><%=data[i].name%></td>
-                    <td><%=data[i].address%></td>
-                    <td><%=data[i].phone%></td>
-                    <td><%=data[i].email%></td>
+                    <td><%=data0[i].name%></td>
+                    <td><%=data0[i].address%></td>
+                    <td><%=data0[i].phone%></td>
+                    <td><%=data0[i].email%></td>
                     <td>
-                        <a class="a-inside edit" href="../sistema/edit/<%=data[i].id%>">Edit</a>
+                        <a class="a-inside edit" href="../sistema/edit/<%=data0[i].id%>">Edit</a>
                        
-                        <a class="a-inside delete" href="../sistema/delete/<%=data[i].id%>">Delete</a>
+                        <a class="a-inside delete" href="../sistema/delete/<%=data0[i].id%>">Delete</a>
                        
                     </td>
                 </tr>

@@ -80,6 +80,9 @@ require('./routes/sistema')(app, passport, parameters); //login,edit,delet,logou
 require('./routes/cadastro')(app, passport, parameters); //signin
 require('./routes/escola')(app, passport); 
 require('./routes/admin')(app, passport); 
+require('./routes/desafio')(app, passport); 
+require('./routes/ranking')(app, passport);
+require('./routes/atividade')(app, passport); 
 
 
 //URLS

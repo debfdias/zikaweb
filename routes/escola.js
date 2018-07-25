@@ -111,8 +111,8 @@ module.exports = function(app, passport) {
 
       	req.getConnection(function(err,connection){
         
-        if(!isStudent(req,res))
-        {
+          if(isAdmin(req,res))
+          {
             var query = connection.query('SELECT * FROM states', function(err,rows)
             {
               if(err)
@@ -124,7 +124,7 @@ module.exports = function(app, passport) {
           }
           else
           {
-            console.log("voce eh estudante, nao pode cadastrar escola");
+            console.log("voce nao pode cadastrar escola");
             res.redirect('/sistema');
           }
       });
@@ -168,6 +168,25 @@ module.exports = function(app, passport) {
 
     	var id = req.params.id;
       	req.getConnection(function(err,connection){
+
+        connection.query('SELECT * FROM states', function(err,rows_)
+        {
+          connection.query('SELECT * FROM schools where id=?', [id], function(err,rows)
+          {
+            if(err)
+              console.log("Error Selecting : %s ",err );
+
+            res.render('app/escola',{page_title:"escola - Node.js",school:rows, state:rows_});
+
+          });
+        });
+      });
+    });
+
+    app.get('/escolas/:id', isLoggedIn, function(req, res) {
+
+      var id = req.params.id;
+        req.getConnection(function(err,connection){
 
         connection.query('SELECT * FROM states', function(err,rows_)
         {
