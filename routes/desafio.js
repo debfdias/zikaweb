@@ -104,14 +104,6 @@
         return false;
     }
 
-     function isTest(req,res)
-     {
-       if (req.user.type == 4)
-         return true;
-       else
-         return false;
-     }
-
 	function isLoggedIn(req, res, next) {
 	    if (req.isAuthenticated())
 	     	return next();
