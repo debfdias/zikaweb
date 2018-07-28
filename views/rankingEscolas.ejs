@@ -21,6 +21,10 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli">
 
+    <script type="../text/javascript" src="jquery-3.1.1.js"></script>
+    <script type="../text/javascript" src="jquery-ui.js"></script>
+    <script type="../text/javascript" src="https://cdn-orig.socket.io/socket.io-1.7.3.js"></script>
+
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="../css/new-age.min.css">
 
@@ -54,9 +58,18 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="feature-item">
+
+                      <form method="post" action="/ranking/escolas">
                       <h3>RANKING ESCOLAS</h3>
                       
                       <div style="padding-top:30px" class="panel-body" >
+
+                        <input name="SearchBox" type="text" value="<%=SearchBoxValue%>" id="SearchBox"> 
+                        <input name="Search" type="Submit" value="Search"> 
+
+                        <label id="msgBox" style="color:green"><%=message%></label>
+                        <input type="hidden" value="<%=message%>" id="msg">
+
                         <table border="1" cellpadding="4" cellspacing="10">
                             <tr>
                                 <th width="100px">No</th>
@@ -92,6 +105,7 @@
 
 
                     </div>
+                    </form>
                   </div>
                   <a class="btn btn-info" href="../sistema">voltar</a>
                  

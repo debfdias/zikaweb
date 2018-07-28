@@ -12,7 +12,6 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="../../vendor/bootstrap/css/bootstrap.min.css" >
-    <link href="/../css/style.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link rel="stylesheet" type="text/css" href="../../vendor/font-awesome/css/font-awesome.min.css">
@@ -54,52 +53,37 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="feature-item">
-                      <form method="post" action="/ranking/escola/<%=school[0].id%>">
-                      <h3>RANKING ESCOLA <%=school[0].name%></h3>
+                      <h3>ESCOLA PROCURAR</h3>
                       
                       <div style="padding-top:30px" class="panel-body" >
+  
+                        <form id="signupform" class="form-horizontal" role="form" method="post" action="/escola/cadastro">
+                               <div class="form-group">
+                                  <label for="name" class="col-md-3 control-label">Nome</label>
+                                  <div class="col-md-9">
+                                    <input type="text" required class="form-control" name="name" placeholder="Nome">
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="state" class="col-md-3 control-label">Estado</label>
+                                  <div class="col-md-9">
+                                   <select class="form-control" id="sel1" required name="stateId">
+                                      <% for(var i=0; i < state.length; i++) { %>
+                                         <option value=<%= state[i].id %>><%= state[i].name %></option>
+                                      <% } %>
+                                   </select>
+                                   </div>
+                                </div>
+                                <div class="form-group">                                 
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Salvar</button>
+                                    </div>
+                                </div>
+                         
 
-                        <input name="SearchBox" type="text" value="<%=SearchBoxValue%>" id="SearchBox"> 
-                        <input name="Search" type="Submit" value="Search"> 
-
-                        <label id="msgBox" style="color:green"><%=message%></label>
-                        <input type="hidden" value="<%=message%>" id="msg">
-
-                        <table border="1" cellpadding="7" cellspacing="10">
-                            <tr>
-                                <th width="100px">No</th>
-                                <th>Nome</th>
-                                <th>Pontos</th>
-                                <th width="150">Ano</th>
-                            </tr>
-                                           
-                            <% if(data.length){ 
-                                            
-                             for(var i = 0; i < data.length;i++) { %>
-                             
-                            <tr>
-                                <td><%=(i+1)%></td>
-                                <td><%=data[i].name%></td>
-                                <td><%=data[i].points%></td>
-                                <td><%=data[i].year%>ª ano</td>
-                            </tr>
-                        <% }
-                        
-                         }else{ %>
-                             <tr>
-                                <td colspan="8">Sem alunos</td>
-                             </tr>
-                        <% } %>
-                            
-                                          
-                            
-                        </table>
-
-
+                        </form> 
                     </div>
-                    </form>
                   </div>
-                  <a class="btn btn-info" href="/ranking/escolas">voltar</a>
                  
                 </div>
               </div>
@@ -108,6 +92,7 @@
         </div>
       </section>
     <!-- Fim Cadastro-->
+    
 
     <footer>
         <div class="container">
