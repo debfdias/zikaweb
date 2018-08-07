@@ -8,7 +8,7 @@
 var LocalStrategy   = require('passport-local').Strategy;
 //var bcrypt = require('bcrypt-nodejs');//used to encrypt your passwords
 var mysqlpool = require('./mysql').pool; 
-var moment = require('moment'); 
+//var moment = require('moment'); 
 
 
 
@@ -236,7 +236,7 @@ module.exports = function(passport, parameters) {
         });
       }));
 
-
+/*
     function calculateMinutes(startDate,endDate)
     {
        var start_date = moment(startDate, 'YYYY-MM-DD HH:mm:ss');
@@ -244,7 +244,7 @@ module.exports = function(passport, parameters) {
        var duration = moment.duration(end_date.diff(start_date));
        var minutes = duration.asMinutes();
        return minutes;
-    }
+    }*/
 
     passport.use('local-login', new LocalStrategy({
           usernameField : 'email',
