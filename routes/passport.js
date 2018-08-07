@@ -10,6 +10,8 @@ var LocalStrategy   = require('passport-local').Strategy;
 var mysqlpool = require('./mysql').pool; 
 //var moment = require('moment'); 
 
+var mysql = require('mysql');
+
 var pool = mysql.createPool({
     connectionLimit : 100,
     host : 'us-cdbr-iron-east-01.cleardb.net',
