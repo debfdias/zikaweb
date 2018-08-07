@@ -10,6 +10,15 @@ var LocalStrategy   = require('passport-local').Strategy;
 var mysqlpool = require('./mysql').pool; 
 //var moment = require('moment'); 
 
+var pool = mysql.createPool({
+    connectionLimit : 100,
+    host : 'us-cdbr-iron-east-01.cleardb.net',
+    user : 'b87ad073f0d63d',
+    password : '2d8c7b6b',
+    database : 'heroku_77659378f7bfef1',
+    debug : 'false'
+});
+
 
 
 
@@ -25,7 +34,7 @@ module.exports = function(passport, parameters) {
 
       //auth user
       passport.deserializeUser(function(id,done) {
-        mysqlpool.getConnection(function(err, connection){
+        pool.getConnection(function(err, connection){
           connection.query("select * from users where id = ?",[id],function(err,rows){
             if(err){
               connection.release();
@@ -171,7 +180,7 @@ module.exports = function(passport, parameters) {
                 newUserMysql.points   = 0;
                 newUserMysql.activityId = 0;
 
-                mysqlpool.getConnection(function(err, connection){
+                pool.getConnection(function(err, connection){
                   connection.query("select * from schools where id = ?",[newUserMysql.schoolId],function(err,rows){
                       if (err)
                       {
@@ -262,7 +271,7 @@ module.exports = function(passport, parameters) {
           
           const ipaddress = req.ip;
 
-          mysqlpool.getConnection(function(err, connection){
+          pool.getConnection(function(err, connection){
               connection.query("select * from users where email = ?",[data.email],function(err,rows){
                   if (err)
                   {
