@@ -16,6 +16,7 @@
   "dependencies": {
     "ejs": "^1.0.0",
     "express": "3.5.1",
+    "connect-flash": "^0.1.1",
     "express-myconnection": "1.0.4",
     "express-session": "^1.15.6",
     "jade": "*",
