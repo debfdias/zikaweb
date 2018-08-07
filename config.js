@@ -8,7 +8,7 @@ var config = {
 		db: 	  'heroku_77659378f7bfef1' 		// your database name
 	},
 	server: {
-		host: '127.0.0.1',
+		host: 'us-cdbr-iron-east-01.cleardb.net',
 		port: '4300'
 	}
 }
