@@ -145,6 +145,7 @@ module.exports = function(app, passport, parameters) {
           if(err)
             console.log("Error Selecting : %s ",err );
 
+          console.log("editado");
           res.render('edit',{page_title:"Edit sistema - Node.js",data:rows});
         });
        }
