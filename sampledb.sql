@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 28-Jul-2018 às 16:54
--- Versão do servidor: 5.6.17
--- PHP Version: 5.5.12
+-- Servidor: localhost
+-- Tempo de Geração: 13/08/2018 às 12:15
+-- Versão do servidor: 5.5.58-0ubuntu0.14.04.1
+-- Versão do PHP: 5.5.9-1ubuntu4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `sampledb`
+-- Banco de dados: `sampledb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `activities`
+-- Estrutura para tabela `activities`
 --
 
 CREATE TABLE IF NOT EXISTS `activities` (
@@ -32,20 +32,22 @@ CREATE TABLE IF NOT EXISTS `activities` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `points` int(11) NOT NULL,
   `active` tinyint(4) NOT NULL,
+  `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
--- Extraindo dados da tabela `activities`
+-- Fazendo dump de dados para tabela `activities`
 --
 
-INSERT INTO `activities` (`id`, `name`, `description`, `points`, `active`) VALUES
-(2, 'Caçando moscas lindas', 'Você vai ter que fazer um monte de coisa', 20, 1);
+INSERT INTO `activities` (`id`, `name`, `description`, `points`, `active`, `type`) VALUES
+(2, 'Caçando moscas lindas', 'Você vai ter que fazer um monte de coisa', 20, 1, 1),
+(3, 'Responder coisinhas', 'responder para saber', 20, 0, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ipslocked`
+-- Estrutura para tabela `ipslocked`
 --
 
 CREATE TABLE IF NOT EXISTS `ipslocked` (
@@ -58,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `ipslocked` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `profiles`
+-- Estrutura para tabela `profiles`
 --
 
 CREATE TABLE IF NOT EXISTS `profiles` (
@@ -68,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `profiles` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Extraindo dados da tabela `profiles`
+-- Fazendo dump de dados para tabela `profiles`
 --
 
 INSERT INTO `profiles` (`id`, `name`) VALUES
@@ -78,7 +80,7 @@ INSERT INTO `profiles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `schools`
+-- Estrutura para tabela `schools`
 --
 
 CREATE TABLE IF NOT EXISTS `schools` (
@@ -94,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `schools` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 --
--- Extraindo dados da tabela `schools`
+-- Fazendo dump de dados para tabela `schools`
 --
 
 INSERT INTO `schools` (`id`, `name`, `city_id`, `state_id`, `points`, `token`, `num_students`, `num_teachers`) VALUES
@@ -112,7 +114,7 @@ INSERT INTO `schools` (`id`, `name`, `city_id`, `state_id`, `points`, `token`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `states`
+-- Estrutura para tabela `states`
 --
 
 CREATE TABLE IF NOT EXISTS `states` (
@@ -123,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `states` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=28 ;
 
 --
--- Extraindo dados da tabela `states`
+-- Fazendo dump de dados para tabela `states`
 --
 
 INSERT INTO `states` (`id`, `uf`, `name`) VALUES
@@ -158,7 +160,7 @@ INSERT INTO `states` (`id`, `uf`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `students`
+-- Estrutura para tabela `students`
 --
 
 CREATE TABLE IF NOT EXISTS `students` (
@@ -183,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `students` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
--- Extraindo dados da tabela `students`
+-- Fazendo dump de dados para tabela `students`
 --
 
 INSERT INTO `students` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `token`, `year`, `name_family`, `cpf_family`, `nc_celpe`, `email`, `password`, `points`, `current_act`, `finished_act`) VALUES
@@ -197,7 +199,7 @@ INSERT INTO `students` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `schoo
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `teachers`
+-- Estrutura para tabela `teachers`
 --
 
 CREATE TABLE IF NOT EXISTS `teachers` (
@@ -215,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
--- Extraindo dados da tabela `teachers`
+-- Fazendo dump de dados para tabela `teachers`
 --
 
 INSERT INTO `teachers` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `subject`, `email`, `password`) VALUES
@@ -225,7 +227,29 @@ INSERT INTO `teachers` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `schoo
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `type_activity`
+--
+
+CREATE TABLE IF NOT EXISTS `type_activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `description_type` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Fazendo dump de dados para tabela `type_activity`
+--
+
+INSERT INTO `type_activity` (`id`, `name_type`, `description_type`) VALUES
+(1, 'Coleta', 'Coletar coisas'),
+(2, 'Quiz', 'Responder coisas'),
+(3, 'Erradicar criadouros', 'Acabar com os focos ');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -239,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
 --
--- Extraindo dados da tabela `users`
+-- Fazendo dump de dados para tabela `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `auth`, `type`) VALUES
