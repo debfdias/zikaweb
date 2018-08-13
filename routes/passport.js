@@ -7,11 +7,11 @@
 
 var LocalStrategy   = require('passport-local').Strategy;
 //var bcrypt = require('bcrypt-nodejs');//used to encrypt your passwords
-//var pool = require('./mysql').pool; 
+var pool = require('./mysql').pool; 
 //var moment = require('moment'); 
 
 var mysql = require('mysql');
-
+/*
 var pool = mysql.createPool({
     connectionLimit : 100,
     host : 'us-cdbr-iron-east-01.cleardb.net',
@@ -21,7 +21,7 @@ var pool = mysql.createPool({
     debug : 'false'
 });
 
-
+*/
 
 
 // expose this function to app using module.exports

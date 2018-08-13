@@ -211,8 +211,8 @@ module.exports = function(app, passport) {
     app.get('/atividades', isLoggedIn, function(req, res) {
 
       	req.getConnection(function(err,connection){
-
-        connection.query('SELECT * FROM activities', function(err,rows)
+        var q = "SELECT a.name AS act_name, a.description AS act_description, a.points, a.active, t.name AS type_name, t.description AS type_description FROM activities a JOIN type_activity t ON a.type = t.id";
+        connection.query(q, function(err,rows)
         {
             if(err)
               console.log("Error Selecting : %s ",err );
