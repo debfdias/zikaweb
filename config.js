@@ -1,4 +1,4 @@
-var config = {
+/*var config = {
 	database: {
 		multipleStatements: true,
 		host:	  'us-cdbr-iron-east-01.cleardb.net', 	// database host
@@ -9,6 +9,21 @@ var config = {
 	},
 	server: {
 		host: 'us-cdbr-iron-east-01.cleardb.net',
+		port: '4300'
+	}
+}
+*/
+var config = {
+	database: {
+		multipleStatements: true,
+		host:	  'localhost', 	// database host
+		user: 	  'root', 		// your database username
+		password: 'root', 		// your database password
+		port: 	  3306, 		// default MySQL port
+		db: 	  'sampledb' 		// your database name
+	},
+	server: {
+		host: 'localhost',
 		port: '4300'
 	}
 }

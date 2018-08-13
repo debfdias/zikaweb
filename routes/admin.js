@@ -23,20 +23,15 @@
 
              email = email.substring(0,email.length-1);
 
-             connection.query('SELECT * FROM teachers WHERE email IN (' + email + ')', function(err,rows){
+        
+             connection.query('SELECT t.name AS teacher_name, t.email, t.phone, t.cpf, t.subject, s.name AS school_name FROM teachers t JOIN schools s ON t.school_id = s.id WHERE email IN (' + email + ')', function(err,rows){
                   if(err)
                   {
                     console.log("Error Selecting : %s ", err );
                   }
                   else
                   {
-                    connection.query('SELECT * from schools', function(err,rows2){
-                      if(err)
-                        console.log("Error Selecting : %s ", err );
-                      res.render('adminPanel', {page_title:"sistema - Node.js", user:rows_, data:rows, school:rows2});
-
-                    });
-
+                    res.render('adminPanel', {page_title:"sistema - Node.js", user:rows_, data:rows});
                   }
 
               });

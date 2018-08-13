@@ -93,11 +93,16 @@ module.exports = function(app, passport) {
 
     app.get('/atividade/cadastro', isLoggedIn, function(req, res) {
 
+      const queryTypeActivities = "select * from type_activity";
+
       	req.getConnection(function(err,connection){
         
 	        if(isAdmin(req,res))
-	        {
-	            res.render('app/cadastroAtividade');
+	        {  
+            connection.query(queryTypeActivities,function (err,rows1)
+            {
+              res.render('app/cadastroAtividade',{page_title:"ZikaWEB ", data:rows1});
+            });
 	        }
 	        else
 	        {
@@ -118,7 +123,8 @@ module.exports = function(app, passport) {
 	            name         : input.name,
 	            description  : input.description,
 	            points       : input.points,
-	            active       : 0
+	            active       : 0,
+              type         : input.typeId
 
 	        };
 
@@ -192,7 +198,7 @@ module.exports = function(app, passport) {
     	var id = req.params.id;
       	req.getConnection(function(err,connection){
 
-        connection.query('SELECT * FROM activities WHERE id=?',[id], function(err,rows)
+        connection.query('SELECT * FROM activities JOIN `type_activity` ON `type_activity`.`id` = `activities`.`type` WHERE activities.id = ?',[id], function(err,rows)
         {
             if(err)
               console.log("Error Selecting : %s ",err );

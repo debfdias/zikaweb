@@ -75,21 +75,11 @@
                              
                             <tr>
                                 <td><%=(i+1)%></td>
-                                <td><%=data[i].name%></td>
+                                <td><%=data[i].teacher_name%></td>
                                 <td><%=data[i].email%></td>
                                 <td><%=data[i].phone%></td>
                                 <td><%=data[i].cpf%></td>
-                                <% if (data[i].school_id == 1)
-                                  {
-                                    var j = data[i].school_id;
-                                  }
-                                  else
-                                    {
-                                      var j = data[i].school_id - 1;
-                                    }
-
-                                %>
-                                <td><%=j%></td>
+                                <td><%=data[i].school_name%></td>
                                 <td><%=data[i].subject%></td>
                                 <td>
                                     <a class="a-inside edit" href="../admin/accept/<%=user[i].id%>">aprovar</a>

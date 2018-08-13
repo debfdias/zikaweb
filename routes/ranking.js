@@ -62,16 +62,13 @@
  		req.getConnection(function (err,connection){
  			var SearchBoxValue = "" ;
  			var message = "";
-	 		connection.query('SELECT * FROM students ORDER BY points DESC', function(err,rows){
+
+	 		connection.query('SELECT st.name AS name, st.points, sc.name AS school_name FROM students st JOIN schools sc ON sc.id = st.school_id ORDER BY st.points DESC', function(err,rows){
 	 			if(err)
 	 				console.log("alguma coisa deu errado");
 
-	 			connection.query('SELECT * FROM schools', function(err2,rows_){
-	 				if(err)
-	 					console.log("alguma coisa deu errado 2");
-	 				else
-		 				res.render('rankingEstudantes', {page_title:"ranking estudantes", data:rows, school:rows_, SearchBoxValue, message});
-		 		});
+		 		res.render('rankingEstudantes', {page_title:"ranking estudantes", data:rows, SearchBoxValue, message});
+		 		
 	 			
 	 		});
 	 	});
@@ -83,7 +80,7 @@
  			var SearchBoxValue = req.body.SearchBox;
  			var SearchBox      = req.body.SearchBox;
 
- 			var q = "SELECT * FROM students WHERE name LIKE '%"+SearchBox+"%' ORDER BY points DESC";
+ 			var q = "SELECT st.name AS name, st.points, sc.name AS school_name FROM students st JOIN schools sc ON sc.id = st.school_id WHERE st.name LIKE '%"+SearchBox+"%' ORDER BY st.points DESC";
  			connection.query(q, function(err,rows){
  				if(err)
  				{
@@ -100,13 +97,9 @@
 						var message = "Estudante não encontrado";
 						console.log(message)
 					}
-
-					connection.query('SELECT * FROM schools', function(err2,rows_){
-			 			if(err)
-			 				console.log("alguma coisa deu errado 2");
-			 			else
-				 			res.render('rankingEstudantes', {page_title:"ranking estus", data:rows, school:rows_, SearchBoxValue, message});
-				 	});
+				 	
+				 	res.render('rankingEstudantes', {page_title:"ranking estus", data:rows,  SearchBoxValue, message});
+				 	
 	 			}
  			});
 
