@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tempo de Geração: 13/08/2018 às 12:15
--- Versão do servidor: 5.5.58-0ubuntu0.14.04.1
--- Versão do PHP: 5.5.9-1ubuntu4.22
+-- Host: 127.0.0.1
+-- Generation Time: 18-Ago-2018 às 23:53
+-- Versão do servidor: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Banco de dados: `sampledb`
+-- Database: `sampledb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `activities`
+-- Estrutura da tabela `activities`
 --
 
 CREATE TABLE IF NOT EXISTS `activities` (
@@ -34,20 +34,21 @@ CREATE TABLE IF NOT EXISTS `activities` (
   `active` tinyint(4) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Fazendo dump de dados para tabela `activities`
+-- Extraindo dados da tabela `activities`
 --
 
 INSERT INTO `activities` (`id`, `name`, `description`, `points`, `active`, `type`) VALUES
-(2, 'Caçando moscas lindas', 'Você vai ter que fazer um monte de coisa', 20, 1, 1),
-(3, 'Responder coisinhas', 'responder para saber', 20, 0, 2);
+(2, 'Caçando moscas lindas', 'Você vai ter que fazer um monte de coisa', 20, 1, 0),
+(3, 'Besouros', '   responder coisas legais sobre besouros', 20, 1, 1),
+(4, 'Escrever músicas', 'Escrever coisas musicais', 15, 0, 4);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `ipslocked`
+-- Estrutura da tabela `ipslocked`
 --
 
 CREATE TABLE IF NOT EXISTS `ipslocked` (
@@ -60,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `ipslocked` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `profiles`
+-- Estrutura da tabela `profiles`
 --
 
 CREATE TABLE IF NOT EXISTS `profiles` (
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `profiles` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Fazendo dump de dados para tabela `profiles`
+-- Extraindo dados da tabela `profiles`
 --
 
 INSERT INTO `profiles` (`id`, `name`) VALUES
@@ -80,7 +81,7 @@ INSERT INTO `profiles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `schools`
+-- Estrutura da tabela `schools`
 --
 
 CREATE TABLE IF NOT EXISTS `schools` (
@@ -92,29 +93,32 @@ CREATE TABLE IF NOT EXISTS `schools` (
   `token` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `num_students` int(11) NOT NULL,
   `num_teachers` int(11) NOT NULL,
+  `address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
--- Fazendo dump de dados para tabela `schools`
+-- Extraindo dados da tabela `schools`
 --
 
-INSERT INTO `schools` (`id`, `name`, `city_id`, `state_id`, `points`, `token`, `num_students`, `num_teachers`) VALUES
-(1, 'Escola das Pitombas', 1, 2, 50, 'pitombeira', 1, 1),
-(2, 'Escola Estadual Bigornas Místicas', 2, 3, 40, 'arara', 1, 0),
-(3, 'Escola dos Raios Ultravioletas', 2, 2, 120, 'violeta', 1, 0),
-(4, 'Escola Municipal Água Boa dos Milagres ', 1, 1, 20, 'aguinha rasa', 0, 0),
-(5, 'escola vincente sabugosa', 1, 11, 0, 'sabugo', 0, 0),
-(6, 'Escola dos Jumentos do Sertão', 1, 5, 0, 'null', 1, 1),
-(7, 'Jubileu de Ouro', 1, 6, 0, 'ouro', 0, 0),
-(8, 'Miralogia Federal', 1, 2, 0, 'null', 0, 0),
-(14, 'Recife de Corais', 1, 1, 200, 'alem', 2, 0),
-(15, 'Escola de Casa Forte', 1, 7, 0, 'null', 0, 1);
+INSERT INTO `schools` (`id`, `name`, `city_id`, `state_id`, `points`, `token`, `num_students`, `num_teachers`, `address`, `phone`) VALUES
+(1, 'Escola das Pitombas', 1, 2, 50, 'pitombeira', 1, 1, '', 0),
+(2, 'Escola Estadual Bigornas Místicas', 2, 3, 40, 'arara', 1, 0, '', 0),
+(3, 'Escola dos Raios Ultravioletas', 2, 2, 120, 'violeta', 1, 0, '', 0),
+(4, 'Escola Municipal Água Boa dos Milagres ', 1, 1, 20, 'aguinha rasa', 0, 0, '', 0),
+(5, 'escola vincente sabugosa', 1, 11, 0, 'sabugo', 0, 0, '', 0),
+(6, 'Escola dos Jumentos do Sertão', 1, 5, 0, 'sertaozao', 1, 9, 'Rua da Travessa dos Jumentos 25', 2147483647),
+(7, 'Jubileu de Ouro', 1, 6, 0, 'ouro', 0, 0, '', 0),
+(8, 'Miralogia Federal', 1, 2, 0, 'null', 0, 0, '', 0),
+(14, 'Recife de Corais', 1, 1, 200, 'alem', 2, 0, '', 0),
+(15, 'Escola de Casa Forte', 1, 7, 0, 'null', 0, 1, '', 0),
+(16, 'Escola das Pérolas Andarilhas', 1, 15, 0, 'null', 0, 0, 'Rua das estrelas, 54', 2147483647);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `states`
+-- Estrutura da tabela `states`
 --
 
 CREATE TABLE IF NOT EXISTS `states` (
@@ -125,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `states` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=28 ;
 
 --
--- Fazendo dump de dados para tabela `states`
+-- Extraindo dados da tabela `states`
 --
 
 INSERT INTO `states` (`id`, `uf`, `name`) VALUES
@@ -160,7 +164,7 @@ INSERT INTO `states` (`id`, `uf`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `students`
+-- Estrutura da tabela `students`
 --
 
 CREATE TABLE IF NOT EXISTS `students` (
@@ -185,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `students` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
--- Fazendo dump de dados para tabela `students`
+-- Extraindo dados da tabela `students`
 --
 
 INSERT INTO `students` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `token`, `year`, `name_family`, `cpf_family`, `nc_celpe`, `email`, `password`, `points`, `current_act`, `finished_act`) VALUES
@@ -199,7 +203,33 @@ INSERT INTO `students` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `schoo
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `teachers`
+-- Estrutura da tabela `subjects`
+--
+
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Extraindo dados da tabela `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`) VALUES
+(1, 'Português'),
+(2, 'Matemática'),
+(3, 'Biologia'),
+(4, 'Química'),
+(5, 'Física'),
+(6, 'Geografia'),
+(7, 'História'),
+(8, 'Outro');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `teachers`
 --
 
 CREATE TABLE IF NOT EXISTS `teachers` (
@@ -213,43 +243,47 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `subject` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `principal` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 --
--- Fazendo dump de dados para tabela `teachers`
+-- Extraindo dados da tabela `teachers`
 --
 
-INSERT INTO `teachers` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `subject`, `email`, `password`) VALUES
-(11, 'pacov', 'Hochstraße', '12/03/1956', '4443', '2121', 1, 'bigu', 'paco', '123'),
-(13, 'janio pereira', 'avacasa', '18/07/1986', '454665', '464645', 6, 'biologia', 'janio', '123');
+INSERT INTO `teachers` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `school_id`, `subject`, `email`, `password`, `principal`) VALUES
+(11, 'pacov', 'Hochstraße', '12/03/1956', '4443', '2121', 1, 'bigu', 'paco', '123', 0),
+(13, 'janio pereira', 'avacasa', '18/07/1986', '454665', '464645', 6, 'biologia', 'janio', '123', 1),
+(14, 'valter casagrande', 'rua das docas', '18/12/1980', '1234546', '15464', 14, 'portugues', 'val', '123', 0),
+(15, 'Pasqual Pasquale', 'Rua dos Navios Flamejantes, 85', '12/07/1978', '5487987845', '1234564678', 16, 'Biologia', 'pasqual', '123', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `type_activity`
+-- Estrutura da tabela `type_activity`
 --
 
 CREATE TABLE IF NOT EXISTS `type_activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `description_type` text COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Fazendo dump de dados para tabela `type_activity`
+-- Extraindo dados da tabela `type_activity`
 --
 
-INSERT INTO `type_activity` (`id`, `name_type`, `description_type`) VALUES
+INSERT INTO `type_activity` (`id`, `name`, `description`) VALUES
 (1, 'Coleta', 'Coletar coisas'),
 (2, 'Quiz', 'Responder coisas'),
-(3, 'Erradicar criadouros', 'Acabar com os focos ');
+(3, 'Erradicar criadouros', 'Acabar com os focos '),
+(4, 'Buscas generalizadas', 'Buscar algum tipo de coisa');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -260,10 +294,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `auth` tinyint(1) DEFAULT '0',
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
 
 --
--- Fazendo dump de dados para tabela `users`
+-- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `auth`, `type`) VALUES
@@ -273,10 +307,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `auth`, `type`) VALUES
 (55, 'fred henrique weasley', 'fred', '123', 1, 1),
 (56, 'pacov', 'paco', '123', 1, 2),
 (62, 'jubileu', 'jubi', '123', 1, 1),
-(63, 'janio pereira', 'janio', '123', 0, 2),
+(63, 'janio pereira', 'janio', '123', 1, 2),
 (64, 'juliano silva', 'juliano', '123', 1, 1),
 (65, 'arnaldo', 'arns', '123', 1, 1),
-(66, 'bruno', 'bru', '123', 1, 1);
+(66, 'bruno', 'bru', '123', 1, 1),
+(67, 'valter casagrande', 'val', '123', 0, 2),
+(68, 'Pasqual Pasquale', 'pasqual', '123', 0, 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
