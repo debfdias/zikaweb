@@ -83,7 +83,8 @@ module.exports = function(app, passport) {
         {
       			connection.query('SELECT * FROM teachers where email=?',[req.user.email],function(err,rows){
       				var school_id = rows[0].school_id;
-      				if(school_id == id)
+              var isPrincipal = rows[0].principal;
+      				if(school_id == id && isPrincipal == 1)
       				{
       		        	connection.query("UPDATE schools set ? WHERE id = ? ",[data,id], function(err, rows) {
       			          	if (err)
@@ -96,7 +97,7 @@ module.exports = function(app, passport) {
       				}
       				else
       				{
-      					console.log("voce nao eh prof dessa escola para editar");
+      					console.log("voce nao eh prof dessa escola ou nao eh diretor para editar");
       					res.redirect('/sistema');
       				}
 

@@ -83,6 +83,7 @@ require('./routes/admin')(app, passport);
 require('./routes/desafio')(app, passport); 
 require('./routes/ranking')(app, passport);
 require('./routes/atividade')(app, passport); 
+require('./routes/atividade_tipo')(app, passport); 
 
 
 //URLS

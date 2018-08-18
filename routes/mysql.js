@@ -5,7 +5,7 @@ var pool =  mysql.createPool({
     host: 'localhost',
     port: 3306,//must specify the port of your mysql local instance in the mysql workbench
     user: "root", // username of your mysql instance
-    password: "root", // the password of your mysql local instance
+    password: "", // the password of your mysql local instance
     database: "sampledb", // the database you are working with in your mysql local instance 
     debug    :  false
 });

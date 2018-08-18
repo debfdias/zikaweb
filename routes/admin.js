@@ -130,6 +130,55 @@
 
  });
 
+  app.get('/admin/accept_p/:id',isLoggedIn, function(req, res) {
+
+   var id = req.params.id;
+
+   req.getConnection(function (err, connection) {
+
+     if(isAdmin(req,res)){
+      connection.query("SELECT * from users WHERE id = ? ",[id], function(err, rows)
+      {
+        var email = rows[0].email;
+        connection.query("SELECT * FROM teachers WHERE email = ? ",[email], function(err2, rows2)
+        {
+          if(err2)
+            console.log("Error  : %s ",err2 );
+
+          var school_id = rows2[0].school_id;
+
+              connection.query("UPDATE schools SET num_teachers = num_teachers+1 WHERE id = ? ",[school_id], function(err, rows)
+              {
+
+                connection.query("UPDATE users SET auth = 1 WHERE id = ? ",[id], function(err, rows)
+                {
+                  connection.query("UPDATE teachers SET principal = 1 WHERE email = ? ",[email], function(err, rows)
+                  {
+                    if(err)
+                      console.log("Error updating : %s ",err );
+                    else
+                      console.log("diretor aprovado e adicionado na escola");
+                  });
+
+                });
+
+              });
+
+          });
+
+        res.redirect('/sistema');
+      });
+    }
+    else
+    {
+      console.log("apenas admins podem aprovar");
+      res.redirect('/sistema');
+    }
+
+  });
+
+ });
+
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
       return next();

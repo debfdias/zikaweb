@@ -11,7 +11,7 @@ var pool = require('./mysql').pool;
 //var moment = require('moment'); 
 
 var mysql = require('mysql');
-
+/*
 var pool = mysql.createPool({
     connectionLimit : 100,
     host : 'us-cdbr-iron-east-01.cleardb.net',
@@ -20,7 +20,7 @@ var pool = mysql.createPool({
     database : 'heroku_77659378f7bfef1',
     debug : 'false'
 });
-
+*/
 
 
 
@@ -95,6 +95,7 @@ module.exports = function(passport, parameters) {
                 newUserMysql.email    = input.email; 
                 newUserMysql.auth     = 0;
                 newUserMysql.type     = 2;
+                newUserMysql.principal= 0;
 
 
                 const insertUser = "insert into users (name, email, password, auth, type) values (?,?,?,?,?)";
@@ -111,9 +112,9 @@ module.exports = function(passport, parameters) {
                   return done(null, newUserMysql);
                 });
 
-                const insertTeacher = "insert into teachers (name, address, birth, phone, cpf, school_id, subject, email, password) values (?,?,?,?,?,?,?,?,?)";
+                const insertTeacher = "insert into teachers (name, address, birth, phone, cpf, school_id, subject, email, password, principal) values (?,?,?,?,?,?,?,?,?,?)";
                 connection.query(insertTeacher,[newUserMysql.username, newUserMysql.address, newUserMysql.birth, 
-                  newUserMysql.phone, newUserMysql.cpf, newUserMysql.schoolId, newUserMysql.subject, newUserMysql.email, newUserMysql.password],function(err,result){
+                  newUserMysql.phone, newUserMysql.cpf, newUserMysql.schoolId, newUserMysql.subject, newUserMysql.email, newUserMysql.password,newUserMysql.principal],function(err,result){
                   if (err)
                   {
                     connection.release();

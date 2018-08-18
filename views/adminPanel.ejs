@@ -66,7 +66,6 @@
                                 <th>CPF</th>
                                 <th width="150">Escola</th>
                                 <th>Matéria</th>
-                                <th width="300px">Ação</th>
                             </tr>
                                            
                             <% if(user.length){ 
@@ -83,7 +82,11 @@
                                 <td><%=data[i].subject%></td>
                                 <td>
                                     <a class="a-inside edit" href="../admin/accept/<%=user[i].id%>">aprovar</a>
-                                   
+                                </td>
+                                <td>
+                                    <a class="a-inside add" href="../admin/accept_p/<%=user[i].id%>">aprovar/diretor</a>
+                                </td>
+                                <td>   
                                     <a class="a-inside delete" href="../admin/refuse/<%=user[i].id%>">desaprovar</a>
                                    
                                 </td>
