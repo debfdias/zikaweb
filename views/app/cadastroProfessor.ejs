@@ -102,10 +102,14 @@
                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="subject" class="col-md-3 control-label">Matéria</label>
-                                    <div class="col-md-9">
-                                        <input type="text" required class="form-control" name="subject" placeholder="Matéria">
-                                    </div>
+                                  <label for="subject" class="col-md-3 control-label">Matéria</label>
+                                  <div class="col-md-9">
+                                   <select class="form-control" id="sel2" required name="subject">
+                                      <% for(var i=0; i < data_subject.length; i++) { %>
+                                         <option value=<%= data_subject[i].name %>><%= data_subject[i].name %></option>
+                                      <% } %>
+                                   </select>
+                                   </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>

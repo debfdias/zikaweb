@@ -65,7 +65,9 @@ module.exports = function(app, passport) {
       	var data = {
 
             name    : input.name,
-            token   : input.token
+            token   : input.token,
+            address : input.address,
+            phone   : input.phone
         };
 
         if(isAdmin(req,res)) 
@@ -145,7 +147,9 @@ module.exports = function(app, passport) {
 	            points   : 0,
 	            token    : 'null',
               num_students : 0,
-              num_teachers : 0
+              num_teachers : 0,
+              address      : input.address,
+              phone        : input.phone
 
 	        };
 

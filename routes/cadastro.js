@@ -64,8 +64,15 @@
         if(err)
           console.log("Error Selecting : %s ",err );
 
-        res.locals.message = req.flash('registerMessage');
-        res.render('app/cadastroProfessor',{page_title:"sistema - Node.js", data_school:rows1});
+        connection.query("select * from subjects", function(err2,rows2)
+        {
+          if(err2)
+            console.log("Error Selecting : %s ",err2 );
+
+          res.locals.message = req.flash('registerMessage');
+          res.render('app/cadastroProfessor',{page_title:"sistema - Node.js", data_school:rows1, data_subject:rows2});
+
+        });
       });
     });
   });
