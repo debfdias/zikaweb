@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="../../vendor/bootstrap/css/bootstrap.min.css" >
+    <link href="../../css/style.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link rel="stylesheet" type="text/css" href="../../vendor/font-awesome/css/font-awesome.min.css">
@@ -57,21 +58,11 @@
                       
                       <div style="padding-top:30px" class="panel-body" >
   
-                        <form id="signupform" class="form-horizontal" role="form" method="post" action="/desafio/cadastro">
+                        <form id="signupform" class="form-horizontal" role="form" method="post" action="/atividade/cadastro">
                                <div class="form-group">
                                   <label for="name" class="col-md-3 control-label">Nome</label>
                                   <div class="col-md-9">
                                     <input type="text" required class="form-control" name="name" placeholder="Nome">
-                                   </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="name" class="col-md-3 control-label">Tipo de desafio</label>
-                                  <div class="col-md-9">
-                                    <select class="form-control" id="sel1" required name="typeId">
-                                      <% for(var i=0; i < data.length; i++) { %>
-                                         <option value=<%= data[i].id %>><%= data[i].name %></option>
-                                      <% } %>
-                                   </select>
                                    </div>
                                 </div>
                                 <div class="form-group">
@@ -80,12 +71,49 @@
                                     <textarea required class="form-control" rows="5" cols="40" name="description" placeholder="Descrição"></textarea>
                                    </div>
                                 </div>
+
                                 <div class="form-group">
-                                  <label for="points" class="col-md-3 control-label">Pontos</label>
-                                  <div class="col-md-9">
-                                    <input type="number" required class="form-control" name="points" placeholder="Pontos">
-                                   </div>
+                                  <label for="description" class="col-md-3 control-label">ATIVIDADES</label>
+
+                                  <table border="1" cellpadding="7" cellspacing="7">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Descrição</th>
+                                        <th>Pontos</th>
+                                    </tr>
+                                <% if(data.length){ 
+                                
+                                   for(var i = 0;i < data.length;i++) { %>
+                                   
+                                  <tr>
+                                      <td><%=data[i].name%></td>
+                                      <td><%=data[i].description%></td>
+                                      <td><%=data[i].points%></td>
+                                      <td>
+                                          <a class="a-inside edit" href="../sistema/edit/%>">Incluir</a>
+                                      </td>
+                                      <td>
+                                          <a class="a-inside add" href="../atividade/edit/<%=data[i].id%>">Editar</a>
+                                      </td>
+                                      <td>  
+                                          <a class="a-inside delete" href="../atividade/delete/<%=data[i].id%>">Delete</a>
+                                         
+                                      </td>
+                                  </tr>
+                                <% }
+                                
+                                 }else{ %>
+                                     <tr>
+                                        <td colspan="3">sem atividades</td>
+                                     </tr>
+                                <% } %>
+
+
+                                </table>
+                              </br>
+                                <a class="a-inside edit" href="../../atividade/cadastro">Adicionar atividade</a>
                                 </div>
+
                                 <div class="form-group">                                 
                                     <div class="col-md-offset-3 col-md-9">
                                         <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Salvar</button>

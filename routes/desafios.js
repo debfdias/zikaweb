@@ -7,19 +7,19 @@
  
 module.exports = function(app, passport) {
 
-    app.get('/atividade/delete/:id', isLoggedIn, function(req, res) {
+    app.get('/desafio/delete/:id', isLoggedIn, function(req, res) {
 
        var id = req.params.id;
 
        req.getConnection(function (err, connection) {
 
           if(isAdmin(req,res)){
-            connection.query("DELETE FROM type_activity WHERE id = ? ",[id], function(err, rows)
+            connection.query("DELETE FROM challenges WHERE id = ? ",[id], function(err, rows)
             {
             	if(err)
                     console.log("Error deleting : %s ",err );
                 else
-                	console.log("atividade deletada por admin");
+                	console.log("desafio deletada por admin");
                 res.redirect('/sistema');
            });
           }
@@ -32,14 +32,14 @@ module.exports = function(app, passport) {
 
     });
 
-    app.get('/atividade/edit/:id', isLoggedIn, function(req, res) {
+    app.get('/desafio/edit/:id', isLoggedIn, function(req, res) {
       var id = req.params.id;
 
       req.getConnection(function(err,connection){
 
       	if(isAdmin(req,res))
       	{
-	        var query = connection.query('SELECT * FROM type_activity WHERE id = ?',[id],function(err,rows)
+	        var query = connection.query('SELECT * FROM challenges WHERE id = ?',[id],function(err,rows)
 	        {
 	         	if(err)
 	            	console.log("Error Selecting : %s ",err );
@@ -49,13 +49,13 @@ module.exports = function(app, passport) {
   	    }
   	    else
   	    {
-  	    	console.log("admins editam atividade");
+  	    	console.log("admins editam desafio");
   	    	res.redirect('/sistema');
   	    }
       }); 
     });
 
-    app.post('/atividade/edit/:id', function(req, res) {
+    app.post('/desafio/edit/:id', function(req, res) {
 
       var input = JSON.parse(JSON.stringify(req.body));
       var id = req.params.id;
@@ -70,7 +70,7 @@ module.exports = function(app, passport) {
 
         if(isAdmin(req,res)) 
         {
-        	connection.query("UPDATE type_activity set ? WHERE id = ? ",[data,id], function(err, rows) {
+        	connection.query("UPDATE challenges set ? WHERE id = ? ",[data,id], function(err, rows) {
 	          	if (err)
 	                console.log("Error Updating : %s ",err );
 	            else
@@ -90,23 +90,28 @@ module.exports = function(app, passport) {
 
     });
 
-    app.get('/atividade/cadastro', isLoggedIn, function(req, res) {
+    app.get('/desafio/cadastro', isLoggedIn, function(req, res) {
+
+      const challenges = "select * from activities";
 
       	req.getConnection(function(err,connection){
         
 	        if(isAdmin(req,res))
 	        {  
-              res.render('app/cadastroAtividade',{page_title:"ZikaWEB "});
+            connection.query(challenges,function (err,rows1)
+            {
+              res.render('app/cadastroDesafio',{page_title:"ZikaWEB ",  data:rows1});
+            });
 	        }
 	        else
 	        {
-	            console.log("voce nao pode cadastrar atividade");
+	            console.log("voce nao pode cadastrar desafio");
 	            res.redirect('/sistema');
 	        }
       });
     });
 
-    app.post('/atividade/cadastro', function(req, res) {
+    app.post('/desafio/cadastro', function(req, res) {
 
 	    var input = JSON.parse(JSON.stringify(req.body));
 
@@ -119,7 +124,7 @@ module.exports = function(app, passport) {
 
 	        };
 
-	        connection.query("INSERT INTO type_activity set ?",[data], function(err,rows){
+	        connection.query("INSERT INTO challenges set ?",[data], function(err,rows){
 	        	if(err)
             		console.log("Error inserting : %s ",err );
             	else
@@ -131,12 +136,12 @@ module.exports = function(app, passport) {
 	    });
     });
 
-    app.get('/atividade/:id', isLoggedIn, function(req, res) {
+    app.get('/desafio/:id', isLoggedIn, function(req, res) {
 
     	var id = req.params.id;
       	req.getConnection(function(err,connection){
 
-        connection.query('SELECT * FROM type_activity WHERE id = ?',[id], function(err,rows)
+        connection.query('SELECT * FROM challenges WHERE id = ?',[id], function(err,rows)
         {
             if(err)
               console.log("Error Selecting : %s ",err );
@@ -146,10 +151,10 @@ module.exports = function(app, passport) {
       });
     });
 
-    app.get('/atividades', isLoggedIn, function(req, res) {
+    app.get('/desafios', isLoggedIn, function(req, res) {
 
       	req.getConnection(function(err,connection){
-        var q = "SELECT * FROM type_activity";
+        var q = "SELECT * FROM challenges";
         connection.query(q, function(err,rows)
         {
             if(err)

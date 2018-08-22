@@ -7,7 +7,7 @@
  
 module.exports = function(app, passport) {
 
-    app.get('/desafio/delete/:id', isLoggedIn, function(req, res) {
+    app.get('/atividade/delete/:id', isLoggedIn, function(req, res) {
 
        var id = req.params.id;
 
@@ -19,20 +19,20 @@ module.exports = function(app, passport) {
             	if(err)
                     console.log("Error deleting : %s ",err );
                 else
-                	console.log("desafio deletado por admin");
+                	console.log("atividade deletado por admin");
                 res.redirect('/sistema');
            });
           }
           else
           {
-            console.log("apenas admins podem deletar desafios");
+            console.log("apenas admins podem deletar atividades");
             res.redirect('/sistema');
           }
       });
 
     });
 
-    app.get('/desafio/edit/:id', isLoggedIn, function(req, res) {
+    app.get('/atividade/edit/:id', isLoggedIn, function(req, res) {
       var id = req.params.id;
 
       req.getConnection(function(err,connection){
@@ -45,29 +45,20 @@ module.exports = function(app, passport) {
   	         {
               console.log("Error Selecting : %s ",err );
              }
-             else
-             {
-              var query2 = connection.query('SELECT * FROM type_activity',function(err2,rows2)
-              {
-                if(err2)
-                  console.log("erro %s ", err2);
 
-                res.render('app/desafioEdit',{page_title:"Edit sistema - Node.js",data:rows, type:rows2});
-
-              });
-             }
-	          	
+              res.render('app/atividadeEdit',{page_title:"Edit sistema - Node.js",data:rows});
+         	
 	        });
   	    }
   	    else
   	    {
-  	    	console.log("admins editam desafios");
+  	    	console.log("admins editam atividades");
   	    	res.redirect('/sistema');
   	    }
       }); 
     });
 
-    app.post('/desafio/edit/:id', function(req, res) {
+    app.post('/atividade/edit/:id', function(req, res) {
 
       var input = JSON.parse(JSON.stringify(req.body));
       var id = req.params.id;
@@ -78,8 +69,7 @@ module.exports = function(app, passport) {
 
             name          : input.name,
             description   : input.description,
-            points        : input.points,
-            type          : input.typeId
+            points        : input.points
         };
 
         if(isAdmin(req,res)) 
@@ -88,44 +78,39 @@ module.exports = function(app, passport) {
 	          	if (err)
 	                console.log("Error Updating : %s ",err );
 	            else
-	           		console.log("editado desafio por admin");
+	           		console.log("editado atividade por admin");
 
 	            res.redirect('/sistema');
           	});
         }
         else
         {
-        	console.log("sem permissao para editar desafio");
+        	console.log("sem permissao para editar atividade");
         	res.redirect('/sistema');
 
         }
-    
-      });
+   
+       });
 
     });
 
-    app.get('/desafio/cadastro', isLoggedIn, function(req, res) {
-
-      const queryTypeActivities = "select * from type_activity";
+    app.get('/atividade/cadastro', isLoggedIn, function(req, res) {
 
       	req.getConnection(function(err,connection){
         
 	        if(isAdmin(req,res))
 	        {  
-            connection.query(queryTypeActivities,function (err,rows1)
-            {
-              res.render('app/cadastroDesafio',{page_title:"ZikaWEB ", data:rows1});
-            });
+              res.render('app/cadastroAtividade',{page_title:"ZikaWEB "});
 	        }
 	        else
 	        {
-	            console.log("voce nao pode cadastrar desafio");
+	            console.log("voce nao pode cadastrar atividade");
 	            res.redirect('/sistema');
 	        }
       });
     });
 
-    app.post('/desafio/cadastro', function(req, res) {
+    app.post('/atividade/cadastro', function(req, res) {
 
 	    var input = JSON.parse(JSON.stringify(req.body));
 
@@ -136,8 +121,7 @@ module.exports = function(app, passport) {
 	            name         : input.name,
 	            description  : input.description,
 	            points       : input.points,
-	            active       : 0,
-              type         : input.typeId
+	            active       : 0
 
 	        };
 
@@ -145,7 +129,7 @@ module.exports = function(app, passport) {
 	        	if(err)
             		console.log("Error inserting : %s ",err );
             	else
-					console.log("desafio cadastrado");
+					console.log("atividade cadastrado");
 
             	res.redirect('/sistema');
             });
@@ -153,7 +137,7 @@ module.exports = function(app, passport) {
 	    });
     });
 
-  app.get('/desafio/activate/:id', isLoggedIn, function(req, res) {
+  app.get('/atividade/activate/:id', isLoggedIn, function(req, res) {
 
 	   var id = req.params.id;
 
@@ -165,21 +149,21 @@ module.exports = function(app, passport) {
 		   			if(err)
 		   				console.log("problema em ativar");
 		   			else
-		   				console.log("desafio ativada")
+		   				console.log("atividade ativada")
 		   			res.redirect('/sistema');
 
 			    });
 		   	}
 		   	else
 		   	{
-		   		console.log("sem permissao para mexer em desafio");
+		   		console.log("sem permissao para mexer em atividade");
 		   		res.redirect('/sistema');
 		   	}
 		    
 		});
 	});
 
-    app.get('/desafio/deactivate/:id', isLoggedIn, function(req, res) {
+    app.get('/atividade/deactivate/:id', isLoggedIn, function(req, res) {
 
 	   var id = req.params.id;
 
@@ -191,7 +175,7 @@ module.exports = function(app, passport) {
 		   			if(err)
 		   				console.log("problema em ativar");
 		   			else
-		   				console.log("desafio desativada");
+		   				console.log("atividade desativada");
 
 		   			res.redirect('/sistema');
 
@@ -206,22 +190,22 @@ module.exports = function(app, passport) {
 		});
 	});
 
-    app.get('/desafio/:id', isLoggedIn, function(req, res) {
+    app.get('/atividade/:id', isLoggedIn, function(req, res) {
 
     	var id = req.params.id;
       	req.getConnection(function(err,connection){
 
-        connection.query('SELECT a.name AS act_name, a.description AS act_description, a.points, a.active, t.name AS type_name, t.description AS type_description FROM activities a JOIN type_activity t ON a.type = t.id WHERE a.id = ?',[id], function(err,rows)
+        connection.query('SELECT a.name AS act_name, a.description AS act_description, a.points, a.active FROM activities a  WHERE a.id = ?',[id], function(err,rows)
         {
             if(err)
               console.log("Error Selecting : %s ",err );
 
-            res.render('app/desafio',{page_title:"atividade - Node.js",data:rows});
+            res.render('app/atividade',{page_title:"atividade - Node.js",data:rows});
         });
       });
     });
 
-    app.get('/desafios', isLoggedIn, function(req, res) {
+    app.get('/atividades', isLoggedIn, function(req, res) {
 
       	req.getConnection(function(err,connection){
         var q = "SELECT a.name AS act_name, a.description AS act_description, a.points, a.active, t.name AS type_name, t.description AS type_description FROM activities a JOIN type_activity t ON a.type = t.id";
