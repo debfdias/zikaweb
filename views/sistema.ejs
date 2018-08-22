@@ -1,67 +1,162 @@
-<%- include layouts/header.ejs %>
+<html lang="pt-BR">
 
-        <div class="page-data">
-         <div class="data-btn">
-           <button onClick="addUser();">+ Add</button>
-           <a class="a-inside edit" href="../escola/cadastro">add escola</a>
+<head>
+    <meta charset="utf-8">
 
+    <title>Conta</title>
 
-           <a class="a-inside edit" href="../ranking/escolas">ranking escola</a>
-           <a class="a-inside edit" href="../ranking/estudantes">ranking estudantes</a>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 
-           <a class="a-inside edit" href="../desafio/cadastro">add desafio</a>
-           <a class="a-inside edit" href="../atividade/cadastro">add atividade</a>
-           <a class="a-inside edit" href="../admin/pendentes">panel</a>
-           <a class="a-inside delete" href="../sistema/logout">logout</a>
-           
-         </div>
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli">
 
-         <div class="data-table">
-         <div class="col-md-6 col-sm-12">
-                        <strong class="text-uppercase">username: </strong>
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="device-mockups/device-mockups.min.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="css/new-age.min.css">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-dark" id="mainNav">
+        <div class="container">
+            <font color="white">
+                <h3> Zika Web </h3>
+            </font>
+        </div>
+    </nav>
+    <!-- Fim Navigation -->
+
+    <!-- Cadastro -->
+    <section class="conta" id="conta">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h3>Conta</h3>
+                    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+                        <div class="container">
+                            <button class="navbar-brand js-scroll-trigger" ng-click="addUser();">
+                                <h4>Adicionar</h4>
+                            </button>
+
+                            <div class="collapse navbar-collapse">
+                                <ul class="navbar-nav ml-auto">
+                                    <li>
+                                        <font color="white"><a href="../escola/cadastro"> Adicionar Escola |</a></font>
+                                    </li>
+                                    <li>
+                                        <font color="white"><a href="../ranking/escolas">| Ranking Escola |</a></font>
+                                    </li>
+                                    </li>
+                                    <li>
+                                        <font color="white"> <a href="../ranking/estudantes">| Ranking Estudantes |</a></font>
+                                    </li>
+                                    </li>
+                                    <li>
+                                        <font color="white"><a href="../atividade/cadastro">| Adicionar Atividade |</a></font>
+                                    </li>
+                                    </li>
+                                    <li>
+                                        <font color="white"><a href="../admin/pendentes">| Pendentes |</a></font>
+                                    </li>
+                                    </li>
+                                    <li>
+                                        <font color="white"><a href="../sistema/logout">| Sair</a></font>
+                                    </li>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </nav>
+
+                    <div class="row col-md-6">
+                        <div class="col-md-3">
+                            <strong class="text-uppercase">Usuário:</strong>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="font-weight-light">
+                                <%= user.name %>
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <p class="font-weight-light"><%= user.name %></p>
-                    </div>
-            <table border="1" cellpadding="7" cellspacing="7">
-                <tr>
-                    <th width="50px">No</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th width="120px">Action</th>
-                </tr>
-                               
-                <% if(data0.length){ 
-                                
-                 for(var i = 0;i < data0.length;i++) { %>
-                 
-                <tr>
-                    <td><%=(i+1)%></td>
-                    <td><%=data0[i].name%></td>
-                    <td><%=data0[i].address%></td>
-                    <td><%=data0[i].phone%></td>
-                    <td><%=data0[i].email%></td>
-                    <td>
-                        <a class="a-inside edit" href="../sistema/edit/<%=data0[i].id%>">Edit</a>
-                       
-                        <a class="a-inside delete" href="../sistema/delete/<%=data0[i].id%>">Delete</a>
-                       
-                    </td>
-                </tr>
-            <% }
+                    <div class="row">
+                        <table border="1" cellpadding="7" cellspacing="7">
+                            <tr>
+                                <th width="50px">ID</th>
+                                <th>Nome</th>
+                                <th>Endereço</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th width="120px">Ações</th>
+                            </tr>
+
+                            <% if(data0.length){ 
+                             for(var i = 0;i < data0.length;i++) { %>
+
+                                <tr>
+                                    <td>
+                                        <%=(i+1)%>
+                                    </td>
+                                    <td>
+                                        <%=data0[i].name%>
+                                    </td>
+                                    <td>
+                                        <%=data0[i].address%>
+                                    </td>
+                                    <td>
+                                        <%=data0[i].phone%>
+                                    </td>
+                                    <td>
+                                        <%=data0[i].email%>
+                                    </td>
+                                    <td>
+                                        <a href="../sistema/edit/<%=data0[i].id%>">Editar</a>
+
+                                        <a href="../sistema/delete/<%=data0[i].id%>">Apagar</a>
+
+                                    </td>
+                                </tr>
+                                <% }
             
              }else{ %>
-                 <tr>
-                    <td colspan="3">No user</td>
-                 </tr>
-            <% } %>
-                
-                              
-                
-            </table>
-         </div>
+                                    <tr>
+                                        <td colspan="7">Nenhuma informação encontrada! :( </td>
+                                    </tr>
+                                    <% } %>
+
+
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        
-<%- include layouts/footer.ejs %>
+        </div>
+    </section>
+    <!-- Fim Cadastro-->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/js" src="../../vendor/jquery/jquery.min.js"></script>
+    <script type="text/js" src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script type="text/js" src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script type="text/js" src="../../js/new-age.min.js"></script>
+
+</body>
+
+</html>

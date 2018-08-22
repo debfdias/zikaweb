@@ -1,28 +1,119 @@
-<%- include layouts/header.ejs %>
+<html lang="pt-BR">
 
-        <div class="page-data">
-            
-            <form method="post" action="/sistema/edit/<%=data[0].id%>">
-                <table cellpadding="11">
-                <tr>
-                    <td class="label">Name</td><td>: <input type="text" name="name" value="<%=data[0].name%>" required></td>
-                 </tr>
-                <tr>
-                    <td class="label">Email</td><td>: <input type="text" value="<%=data[0].email%>" name="email" required></td>
-                 </tr>
-                 <tr>
-                    <td class="label">Senha</td><td>: <input type="text" name="password" value="<%=data[0].password%>" required></td>
-                 </tr>
-                 <tr>
-                    <td class="label"></td>
-                    <td>
-                        &nbsp; <input type="submit" name="submit" value="Save">
-                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelAdd()">
-                    </td>
-                 </tr>
-                </table>
-            </form>
-            
+<head>
+    <meta charset="utf-8">
+
+    <title>Editar</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="device-mockups/device-mockups.min.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="css/new-age.min.css">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-dark" id="mainNav">
+        <div class="container">
+            <font color="white">
+                <h3> Zika Web </h3>
+            </font>
         </div>
-        
-<%- include layouts/footer.ejs %>
+        </div>
+    </nav>
+    <!-- Fim Navigation -->
+
+    <!-- Cadastro -->
+    <section class="cadastro" id="cadastro">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h3>Editar</h3>
+
+                    <form method="post" action="/sistema/edit/<%=data[0].id%>">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <label>Nome</label>
+                                <input type="text" class="form-control" name="name" value="<%=data[0].name%>" placeholder="Nome" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Email</label>
+                                <input type="text" class="form-control" name="email" value="<%=data[0].email%>" placeholder="Email" required>
+                            </div>
+
+                        </div>
+                        </br>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <label>Senha</label>
+                                <input type="text" class="form-control" nname="password" value="<%=data[0].password%>" placeholder="Senha" required>
+                            </div>
+
+                        </div>
+                        </br>
+                        <hr>
+                        </br>
+
+                        <div class="row">
+
+                            <div class="col-md-6 text-right">
+                                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Alterar</button>
+                            </div>
+                            <div class="col-md-6 text-left">
+                                <button id="btn-signup" class="btn btn-info" type="button" name="cancel" value="Cancel" onClick="cancelAdd()"><i class="icon-hand-right"></i>Cancelar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fim Cadastro-->
+
+    <footer>
+        <div class="container">
+            <p>&copy; Your Website 2018. All Rights Reserved.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">Terms</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">FAQ</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/js" src="../../vendor/jquery/jquery.min.js"></script>
+    <script type="text/js" src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script type="text/js" src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script type="text/js" src="../../js/new-age.min.js"></script>
+
+</body>
+
+</html>

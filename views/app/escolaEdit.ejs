@@ -1,135 +1,108 @@
-<!DOCTYPE html>
 <html lang="pt-BR">
 
-  <head>
+<head>
+  <meta charset="utf-8">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <title>Editar Escola</title>
 
-    <title>ZikaWeb</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="../../vendor/bootstrap/css/bootstrap.min.css" >
+  <!-- Custom fonts for this template -->
+  <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="vendor/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli">
 
-    <!-- Custom fonts for this template -->
-    <link rel="stylesheet" type="text/css" href="../../vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../../vendor/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli">
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" type="text/css" href="device-mockups/device-mockups.min.css">
 
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" href="../../css/new-age.min.css">
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" href="css/new-age.min.css">
 
-  </head>
+</head>
 
-  <body id="page-top">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-dark" id="mainNav">
+    <div class="container">
+      <font color="white">
         <h3> Zika Web </h3>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <h5><a id="signinlink" href="/">Entrar</a></div></h5>
-            </li>            
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- Fim Navigation -->
+      </font>
+    </div>
+    </div>
+  </nav>
+  <!-- Fim Navigation -->
 
 
+  <!-- Cadastro -->
+  <section class="cadastro" id="cadastro">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
 
-    <!-- Cadastro -->
-    <section class="cadastro" id="cadastro">
-        <div class="container">
-          <div class="row">
+          <h3>Editar Escola</h3>
 
-            <div class="col-lg-8 my-auto">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="feature-item">
-                      <h3>ESCOLA EDITAR</h3>
-                      
-                      <div style="padding-top:30px" class="panel-body" >
-  
-                        <form id="signupform" class="form-horizontal" role="form" method="post" action="/escola/edit/<%=school[0].id%>">
-                               <div class="form-group">
-                                  <label for="name" class="col-md-3 control-label">Nome</label>
-                                  <div class="col-md-9">
-                                    <input type="text" required class="form-control" name="name" value="<%=school[0].name%>">
-                                   </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="address" class="col-md-3 control-label">Endereço</label>
-                                  <div class="col-md-9">
-                                    <input type="text" required class="form-control" name="address" value="<%=school[0].address%>">
-                                   </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="phone" class="col-md-3 control-label">Contato do responsável</label>
-                                  <div class="col-md-9">
-                                    <input type="number" required class="form-control" name="phone" value="<%=school[0].phone%>">
-                                   </div>
-                                </div>
+          <form id="signupform" class="form-horizontal" role="form" method="post" action="/escola/edit/<%=school[0].id%>">
 
-                                <div class="form-group">
-                                  <label for="token" class="col-md-3 control-label">Token</label>
-                                  <div class="col-md-9">
-                                    <input type="text" name="token" value="<%=school[0].token%>" required>
-                                   </div>
-                                </div>
-                                <div class="form-group">                                 
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Salvar</button>
-                                    </div>
-                                </div>
-                         
+            </br>
+            <div class="row">
 
-                        </form> 
-                    </div>
-                  </div>
-                 
-                </div>
+              <div class="col-md-6">
+                <label>Nome</label>
+                <input type="text" class="form-control" name="name" value="<%=school[0].name%>" placeholder="Nome" required>
+              </div>
+              <div class="col-md-6">
+                <label>Token</label>
+                <input type="text" class="form-control" name="token" value="<%=school[0].token%>" placeholder="Token" required>
+              </div>
+
+            </div>
+            </br>
+
+            <hr>
+            <div class="row">
+              <div class="col-md-3">
+                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Cadastrar</button>
               </div>
             </div>
-            </div>
-        </div>
-      </section>
-    <!-- Fim Cadastro-->
-    
+            
+          </form>
 
-    <footer>
-        <div class="container">
-          <p>&copy; Your Website 2018. All Rights Reserved.</p>
-          <ul class="list-inline">
-            <li class="list-inline-item">
-              <a href="#">Privacy</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Terms</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">FAQ</a>
-            </li>
-          </ul>
         </div>
-      </footer>
-  
-      <!-- Bootstrap core JavaScript -->
-      <script type="text/js" src="../../vendor/jquery/jquery.min.js"></script>
-      <script type="text/js" src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
-      <!-- Plugin JavaScript -->
-      <script type="text/js" src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-  
-      <!-- Custom scripts for this template -->
-      <script type="text/js"src="../../js/new-age.min.js"></script>
-  
-    </body>
-  
-  </html>
+      </div>
+    </div>
+  </section>
+  <!-- Fim Cadastro-->
+
+  <footer>
+    <div class="container">
+      <p>&copy; Your Website 2018. All Rights Reserved.</p>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="#">Privacy</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#">Terms</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#">FAQ</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/js" src="../../vendor/jquery/jquery.min.js"></script>
+  <script type="text/js" src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script type="text/js" src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script type="text/js" src="../../js/new-age.min.js"></script>
+
+</body>
+
+</html>
