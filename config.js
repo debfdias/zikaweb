@@ -1,4 +1,4 @@
-/*var config = {
+var config = {
 	database: {
 		multipleStatements: true,
 		host:	  'us-cdbr-iron-east-01.cleardb.net', 	// database host
@@ -12,7 +12,7 @@
 		port: '4300'
 	}
 }
-*/
+/*
 var config = {
 	database: {
 		multipleStatements: true,
@@ -27,5 +27,5 @@ var config = {
 		port: '4300'
 	}
 }
-
+*/
 module.exports = config
