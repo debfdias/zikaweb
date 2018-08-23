@@ -114,13 +114,15 @@ module.exports = function(app, passport) {
     app.post('/desafio/cadastro', function(req, res) {
 
 	    var input = JSON.parse(JSON.stringify(req.body));
+      var acts = input.acts + " ";
 
 	    req.getConnection(function (err, connection) {
 
 		    var data = {
 
 	            name         : input.name,
-	            description  : input.description
+	            description  : input.description,
+              acts_ids     : acts
 
 	        };
 

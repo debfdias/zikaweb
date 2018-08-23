@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Ago-2018 às 23:53
+-- Generation Time: 23-Ago-2018 às 04:39
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -32,18 +32,48 @@ CREATE TABLE IF NOT EXISTS `activities` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `points` int(11) NOT NULL,
   `active` tinyint(4) NOT NULL,
-  `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `activities`
 --
 
-INSERT INTO `activities` (`id`, `name`, `description`, `points`, `active`, `type`) VALUES
-(2, 'Caçando moscas lindas', 'Você vai ter que fazer um monte de coisa', 20, 1, 0),
-(3, 'Besouros', '   responder coisas legais sobre besouros', 20, 1, 1),
-(4, 'Escrever músicas', 'Escrever coisas musicais', 15, 0, 4);
+INSERT INTO `activities` (`id`, `name`, `description`, `points`, `active`) VALUES
+(2, 'Caçando moscas lindas', 'Você vai ter que fazer um monte de coisa', 20, 1),
+(3, 'Besouros', '   responder coisas legais sobre besouros', 20, 1),
+(4, 'Escrever músicas', 'Escrever coisas musicais', 15, 0),
+(6, 'Coisas aleatórias', 'Trecos', 30, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `challenges`
+--
+
+CREATE TABLE IF NOT EXISTS `challenges` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `acts_ids` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+
+--
+-- Extraindo dados da tabela `challenges`
+--
+
+INSERT INTO `challenges` (`id`, `name`, `description`, `acts_ids`) VALUES
+(1, 'Coleta', 'Coletar coisas', ''),
+(2, 'Quiz', 'Responder coisas', ''),
+(3, 'Erradicar criadouros', 'Acabar com os focos ', ''),
+(4, 'Buscas generalizadas', 'Buscar algum tipo de coisa', ''),
+(5, 'asas', 'asasa', ''),
+(6, 'saaa', 'aaaa', ''),
+(7, '444', '555', '3'),
+(8, 'assasa', 'asas', '2,4 .'),
+(9, 'desafio1', 'opoapopa', '2,6 .'),
+(10, 'jogar bola', 'pegar a chuteira', '3,4 .');
 
 -- --------------------------------------------------------
 
@@ -96,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `schools` (
   `address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `phone` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
 --
 -- Extraindo dados da tabela `schools`
@@ -113,7 +143,8 @@ INSERT INTO `schools` (`id`, `name`, `city_id`, `state_id`, `points`, `token`, `
 (8, 'Miralogia Federal', 1, 2, 0, 'null', 0, 0, '', 0),
 (14, 'Recife de Corais', 1, 1, 200, 'alem', 2, 0, '', 0),
 (15, 'Escola de Casa Forte', 1, 7, 0, 'null', 0, 1, '', 0),
-(16, 'Escola das Pérolas Andarilhas', 1, 15, 0, 'null', 0, 0, 'Rua das estrelas, 54', 2147483647);
+(16, 'Escola das Pérolas Andarilhas', 1, 15, 0, 'null', 0, 0, 'Rua das estrelas, 54', 2147483647),
+(17, 'Escola dos Manguezais', 1, 17, 0, 'null', 0, 0, '51030000', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -256,29 +287,6 @@ INSERT INTO `teachers` (`id`, `name`, `address`, `birth`, `phone`, `cpf`, `schoo
 (13, 'janio pereira', 'avacasa', '18/07/1986', '454665', '464645', 6, 'biologia', 'janio', '123', 1),
 (14, 'valter casagrande', 'rua das docas', '18/12/1980', '1234546', '15464', 14, 'portugues', 'val', '123', 0),
 (15, 'Pasqual Pasquale', 'Rua dos Navios Flamejantes, 85', '12/07/1978', '5487987845', '1234564678', 16, 'Biologia', 'pasqual', '123', 0);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `type_activity`
---
-
-CREATE TABLE IF NOT EXISTS `type_activity` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
-
---
--- Extraindo dados da tabela `type_activity`
---
-
-INSERT INTO `type_activity` (`id`, `name`, `description`) VALUES
-(1, 'Coleta', 'Coletar coisas'),
-(2, 'Quiz', 'Responder coisas'),
-(3, 'Erradicar criadouros', 'Acabar com os focos '),
-(4, 'Buscas generalizadas', 'Buscar algum tipo de coisa');
 
 -- --------------------------------------------------------
 
