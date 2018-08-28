@@ -3,12 +3,7 @@
 
   <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>ZikaWeb</title>
+      <title>Cadastro Professor</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="../../vendor/bootstrap/css/bootstrap.min.css" >
@@ -26,14 +21,13 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="../../css/new-age.min.css">
 
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
     </script>
 
-    <script type="text/javascript" >
-  
+    <script type="text/javascript" >    
+                         
         $(document).ready(function() {
 
             function limpa_formulário_cep() {
@@ -104,165 +98,203 @@
 
   <body id="page-top">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
+  <nav class="navbar navbar-expand-lg fixed-top bg-dark" id="mainNav">
+    <div class="container">
+      <font color="white">
         <h3> Zika Web </h3>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <h5><a id="signinlink" href="/">Entrar</a></div></h5>
-            </li>            
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- Fim Navigation -->
-
-
+      </font>
+    </div>
+    </div>
+  </nav>
+  <!-- Fim Navigation -->
 
     <!-- Cadastro -->
-    <section class="cadastro" id="cadastro">
-        <div class="container">
-          <div class="row">
+  <section class="cadastro" id="cadastro">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+        
 
-            <div class="col-lg-8 my-auto">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="feature-item">
-                      <h3>Cadastro Professor</h3>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <h3>Cadastro Professor</h3>
+
+          <form id="signupform" class="form-horizontal" role="form" method="post" action="/cadastro/estudante">
+            </br>
+            <div class="row">
+
+              <div class="col-md-6">
+                <label>Nome</label>
+                <input type="text" required class="form-control" id="name" name="name" placeholder="Nome">
+              </div>
+              <div class="col-md-6">
+                <label>CPF</label>
+                <input type="text" required class="form-control" name="cpf" id="cpf" placeholder="CPF">
+                <script type="text/javascript">
+                    $("#cpf").mask("000.000.000-00");
+                </script>
+              </div>
+
+
+            </div>
+            </br>
+
                       
-                      <div style="padding-top:30px" class="panel-body" >
-  
-                        <form id="signupform" class="form-horizontal" role="form" method="post" action="/cadastro/professor">
-                               <div class="form-group">
-                                    <label for="name" class="col-md-3 control-label">Nome</label>
-                                    <div class="col-md-9">
-                                        <input type="text" required class="form-control" name="name" placeholder="Nome">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                  <label for="address" class="col-md-3 control-label">Endereço</label>
-                                  <div class="col-md-9">
-                                    <label for="name" class="col-md-3 control-label">Cep</label>
-                                      <input name="address" required type="text" id="cep" value=""  placeholder="Cep" maxlength="9" /><br />
-                                  </div>
-
-                                  <div class="col-md-9">
-                                    <label for="rua" class="col-md-3 control-label">Rua</label>
-                                      <input name="rua" required type="text" id="rua"  /><br />
-                                  </div>
-
-                                  <div class="col-md-9">
-                                    <label for="bairro" class="col-md-3 control-label">Bairro</label>
-                                      <input name="bairro" required type="text" id="bairro" /><br />
-                                  </div>
-
-                                  <div class="col-md-9">
-                                    <label for="cidade" class="col-md-3 control-label">Cidade</label>
-                                      <input name="cidade" required type="text" id="cidade" /><br />
-                                  </div>
-
-                                  <div class="col-md-9">
-                                    <label for="numero" class="col-md-3 control-label">Número</label>
-                                      <input name="numero" required type="text" id="numero" /><br />
-                                  </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="birth" class="col-md-3 control-label">Data de nascimento</label>
-                                    <div class="col-md-9">
-                                        <input type="text" required class="form-control" name="birth" placeholder="Nascimento">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone" class="col-md-3 control-label">Telefone</label>
-                                    <div class="col-md-9">
-                                        <input type="number" required class="form-control" name="phone" placeholder="Telefone">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cpf" class="col-md-3 control-label">CPF</label>
-                                    <div class="col-md-9">
-                                        <input type="number" required class="form-control" name="cpf" placeholder="CPF">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="school" class="col-md-3 control-label">Escola</label>
-                                  <div class="col-md-9">
-                                   <select class="form-control" id="sel1" required name="schoolId">
+            <div class="row">
+              
+              <div class="col-md-6">
+                <label>Escola</label>
+                <select class="form-control" id="sel1" required name="schoolId">
                                       <% for(var i=0; i < data_school.length; i++) { %>
                                          <option value=<%= data_school[i].id %>><%= data_school[i].name %></option>
                                       <% } %>
-                                   </select>
-                                   </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="subject" class="col-md-3 control-label">Matéria</label>
-                                  <div class="col-md-9">
-                                   <select class="form-control" id="sel2" required name="subject">
-                                      <% for(var i=0; i < data_subject.length; i++) { %>
-                                         <option value=<%= data_subject[i].name %>><%= data_subject[i].name %></option>
-                                      <% } %>
-                                   </select>
-                                   </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
-                                    <div class="col-md-9">
-                                        <input type="text" required class="form-control" name="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Senha</label>
-                                    <div class="col-md-9">
-                                        <input type="text" required class="form-control" name="password" placeholder="Senha">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="confirm" class="col-md-3 control-label">Confime senha</label>
-                                    <div class="col-md-9">
-                                        <input type="text" required class="form-control" name="confirm" placeholder="Repita a senha">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <!-- Button -->                                       
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Cadastrar</button>
-                                        
-                                    </div>
-                                </div>
-                         
+                </select>
+              </div>
 
-                        </form> 
-                    </div>
+              <div class="col-md-6">
+                  <label>Matéria</label>
+                   <select class="form-control" id="sel2" required name="subject">
+                      <% for(var i=0; i < data_subject.length; i++) { %>
+                         <option value=<%= data_subject[i].name %>><%= data_subject[i].name %></option>
+                      <% } %>
+                   </select>
+              </div>
+
+            </div>
+            </br>
+
+            
+            <div class="row">
+              
+              <div class="col-md-6">
+                <label>E-mail</label>
+                <input type="text" required class="form-control" id="email" name="email" placeholder="Email">
+              </div>
+              <div class="col-md-6">
+                    <label>Confirmar E-mail</label>
+                    <input type="text" required class="form-control" id="confirm_email" name="confirm_email" placeholder="Repita o Email">
                   </div>
-                 
+
+            </div>
+            </br>
+
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <label>Senha</label>
+                <input type="text" required class="form-control" name="password" placeholder="Senha" minlength="6">
+              </div>
+              <div class="col-md-6">
+                <label>Confimar Senha</label>
+                <input type="text" required class="form-control" name="confirm" placeholder="Repita a senha" minlength="6">
+              </div>
+
+            </div>
+            </br>
+            <div class="row">
+
+                    <div class="col-md-6">
+                      <label>Sou Gestor?</label>
+                      <select class="form-control" id="year" required name="year">
+                          <option value=true>Sim</option>
+                          <option value=false>Não</option>
+                        </select>                    </div>
+
+                    <div class="col-md-6">
+                            <label>Telefone</label>
+                            <input type="text" required class="form-control " name="phone" id="phone" placeholder="Telefone" >
+                            <script type="text/javascript">
+                                $("#phone").mask("(00) 00000-0000");
+                            </script>
+                          </div> 
+            </div>
+            <hr>
+            
+            </br>
+            <label class="col-md-12 text-center">
+                <h4>Endereço</h4>
+            </label>
+            <div class="row">                
+
+                <div class="col-md-6">
+                    <label>Cep</label>
+                    <input name="address" id="address" required type="text"  class="form-control" placeholder="Cep" maxlength="9">
+                    <script type="text/javascript">
+                        $("#address").mask("99.999-999");
+                    </script>
                 </div>
+
+                <div class="col-md-6">
+                    <label>Rua</label>
+                    <input name="rua" required type="text" class="form-control" placeholder="Rua">
+                </div>
+            </div>
+        </br>
+
+            <div class="row">                
+
+                <div class="col-md-6">
+                    <label>Bairro</label>
+                    <input name="bairro" required type="text" class="form-control" placeholder="Bairro">
+                </div>
+
+                <div class="col-md-6">
+                    <label>Cidade</label>
+                    <input name="cidade" required type="text" class="form-control" placeholder="Cidade">
+                </div>
+
+            </div>
+        </br>
+
+            <div class="row">                
+
+                <div class="col-md-6">
+                    <label>Número</label>
+                    <input name="numero" required type="text" class="form-control" placeholder="Numero" maxlength="5">
+                </div>
+
+            </div>
+            <hr>
+            
+        </br>
+        <div class="row">
+            <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+            <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+            <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+            <div class="col-md-6">
+                    <label>Data de nascimento</label>
+                    <input type="text" required class="form-control" name="birth" id="birth" placeholder="Data de Nascimento" autocomplete="off">
+                        
+                        <script>
+                            $(function() {
+                              $( "#birth" ).datepicker({dateFormat: 'dd/mm/yy'});
+                            });
+                            </script>
+                  </div>              
+
+         </div>
+
+        
+        </br>
+
+        <hr>
+            <div class="row">
+              <div class="col-md-3">
+                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Cadastrar</button>
               </div>
             </div>
-            </div>
-            <div class="col-lg-4 my-auto">
-                    <div class="device-container">
-                      <div class="device-mockup iphone6_plus portrait white">
-                        <div class="device">
-                          <div class="screen">
-                            <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                            <img src="../../img/demo-screen-1.jpg" class="img-fluid" alt="">
-                          </div>
-                          <div class="button">
-                            <!-- You can hook the "home button" to some JavaScript events or just remove it -->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-            </div>
-        </div>
-      </section>
-    <!-- Fim Cadastro-->
+
+          </form>
+                 </div>
+      </div>
+    </div>
+  </section>
+  <!-- Fim Cadastro-->
+
 
     <footer>
         <div class="container">
@@ -289,7 +321,9 @@
       <script type="text/js" src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
   
       <!-- Custom scripts for this template -->
-      <script type="text/js"src="../../js/new-age.min.js"></script>
+      <script type="text/js"src="../../js/new-age.min.js"></script>     
+
+       
   
     </body>
   
