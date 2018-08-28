@@ -44,7 +44,7 @@ module.exports = function(app, passport) {
 	         	if(err)
 	            	console.log("Error Selecting : %s ",err );
 
-	          	//res.render('app/atividadeEdit',{page_title:"Edit sistema - Node.js",data:rows});
+	          	//res.render('atividadeEdit',{page_title:"Edit sistema - Node.js",data:rows});
 	        });
   	    }
   	    else
@@ -100,7 +100,7 @@ module.exports = function(app, passport) {
 	        {  
             connection.query(challenges,function (err,rows1)
             {
-              res.render('app/cadastroDesafio',{page_title:"ZikaWEB ",  data:rows1});
+              res.render('cadastroDesafio',{page_title:"ZikaWEB ",  data:rows1});
             });
 	        }
 	        else
@@ -148,7 +148,7 @@ module.exports = function(app, passport) {
             if(err)
               console.log("Error Selecting : %s ",err );
 
-            //res.render('app/atividade',{page_title:"atividade - Node.js",data:rows});
+            //res.render('atividade',{page_title:"atividade - Node.js",data:rows});
         });
       });
     });
@@ -162,7 +162,7 @@ module.exports = function(app, passport) {
             if(err)
               console.log("Error Selecting : %s ",err );
 
-            //res.render('app/atividadesLista',{page_title:"atividade - Node.js",data:rows});
+            //res.render('atividadesLista',{page_title:"atividade - Node.js",data:rows});
         });
       });
     });

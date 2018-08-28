@@ -73,7 +73,7 @@ module.exports = function(app, passport, parameters) {
         options.message = req.flash('loginMessage');
 
         res.locals.message = req.flash('loginMessage');
-        res.render('app/index',options);
+        res.render('index',options);
     });
     
 

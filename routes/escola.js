@@ -44,7 +44,7 @@ module.exports = function(app, passport) {
 	         	if(err)
 	            	console.log("Error Selecting : %s ",err );
 
-	          	res.render('app/escolaEdit',{page_title:"Edit sistema - Node.js",school:rows});
+	          	res.render('escolaEdit',{page_title:"Edit sistema - Node.js",school:rows});
 	        });
   	    }
   	    else
@@ -121,7 +121,7 @@ module.exports = function(app, passport) {
               if(err)
                 console.log("Error Selecting : %s ",err );
 
-              res.render('app/cadastroEscola',{page_title:"escola - Node.js",state:rows});
+              res.render('cadastroEscola',{page_title:"escola - Node.js",state:rows});
 
             });
           }
@@ -181,7 +181,7 @@ module.exports = function(app, passport) {
             if(err)
               console.log("Error Selecting : %s ",err );
 
-            res.render('app/escola',{page_title:"escola - Node.js",school:rows, state:rows_});
+            res.render('escola',{page_title:"escola - Node.js",school:rows, state:rows_});
 
           });
         });
@@ -200,7 +200,7 @@ module.exports = function(app, passport) {
             if(err)
               console.log("Error Selecting : %s ",err );
 
-            res.render('app/escola',{page_title:"escola - Node.js",school:rows, state:rows_});
+            res.render('escola',{page_title:"escola - Node.js",school:rows, state:rows_});
 
           });
         });

@@ -22,7 +22,7 @@
 
         connection.query(queryProfiles,function(err,rows2)
         {
-          res.render('app/cadastro',{page_title:"sistema - Node.js", data_state:rows1, data_profiles:rows2});
+          res.render('cadastro',{page_title:"sistema - Node.js", data_state:rows1, data_profiles:rows2});
         });
 
       });
@@ -70,7 +70,7 @@
             console.log("Error Selecting : %s ",err2 );
 
           res.locals.message = req.flash('registerMessage');
-          res.render('app/cadastroProfessor',{page_title:"sistema - Node.js", data_school:rows1, data_subject:rows2});
+          res.render('cadastroProfessor',{page_title:"sistema - Node.js", data_school:rows1, data_subject:rows2});
 
         });
       });
@@ -95,7 +95,7 @@
           console.log("Error Selecting : %s ",err );
 
         res.locals.message = req.flash('registerMessage');
-        res.render('app/cadastroEstudante',{page_title:"sistema - Node.js", data_school:rows1});
+        res.render('cadastroEstudante',{page_title:"sistema - Node.js", data_school:rows1});
       });
     });
 
