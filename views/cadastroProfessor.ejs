@@ -222,15 +222,15 @@
 
                 <div class="col-md-6">
                     <label>Cep</label>
-                    <input name="address" id="address" required type="text"  class="form-control" placeholder="Cep" maxlength="9">
+                    <input name="address" required type="text" id="cep" value="" class="form-control" placeholder="Cep" maxlength="9" /><br />
                     <script type="text/javascript">
-                        $("#address").mask("99.999-999");
+                        $("#cep").mask("99.999-999");
                     </script>
                 </div>
 
                 <div class="col-md-6">
                     <label>Rua</label>
-                    <input name="rua" required type="text" class="form-control" placeholder="Rua">
+                    <input name="rua" required type="text" id="rua" class="form-control" placeholder="Rua" /><br />
                 </div>
             </div>
         </br>
@@ -239,12 +239,12 @@
 
                 <div class="col-md-6">
                     <label>Bairro</label>
-                    <input name="bairro" required type="text" class="form-control" placeholder="Bairro">
+                    <input name="bairro" required type="text" id="bairro" class="form-control" placeholder="Bairro">
                 </div>
 
                 <div class="col-md-6">
                     <label>Cidade</label>
-                    <input name="cidade" required type="text" class="form-control" placeholder="Cidade">
+                    <input name="cidade" required type="text" id="cidade" class="form-control" placeholder="Cidade">
                 </div>
 
             </div>
@@ -254,7 +254,7 @@
 
                 <div class="col-md-6">
                     <label>Número</label>
-                    <input name="numero" required type="text" class="form-control" placeholder="Numero" maxlength="5">
+                    <input name="numero" required type="text" id="numero" class="form-control" placeholder="Numero" maxlength="5">
                 </div>
 
             </div>
