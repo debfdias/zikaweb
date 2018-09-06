@@ -26,6 +26,6 @@ var config = {
 		host: 'localhost',
 		port: '4300'
 	}
-}
-*/
+}*/
+
 module.exports = config

@@ -7,7 +7,7 @@
 
 var LocalStrategy   = require('passport-local').Strategy;
 //var bcrypt = require('bcrypt-nodejs');//used to encrypt your passwords
-//var pool = require('./mysql').pool; 
+var pool = require('./mysql').pool; 
 //var moment = require('moment'); 
 
 var mysql = require('mysql');

@@ -121,7 +121,11 @@ module.exports = function(app, passport) {
               if(err)
                 console.log("Error Selecting : %s ",err );
 
-              res.render('cadastroEscola',{page_title:"escola - Node.js",state:rows});
+              var query = connection.query('SELECT * FROM districts', function(err,rows2)
+              {
+
+                res.render('cadastroEscola',{page_title:"escola - Node.js",state:rows, district:rows2});
+              });
 
             });
           }
@@ -144,6 +148,7 @@ module.exports = function(app, passport) {
 	            name     : input.name,
 	            city_id  : 1,
 	            state_id : input.stateId,
+              district_id : input.districtId,
 	            points   : 0,
 	            token    : 'null',
               num_students : 0,
