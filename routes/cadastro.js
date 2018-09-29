@@ -48,6 +48,10 @@
       {
         res.redirect('/cadastro/estudante/'+id_state);
       }
+      else if(id_profile == 3)
+      {
+        res.redirect('/cadastro/asinha/'+id_state);
+      }
 
     });
 
@@ -107,6 +111,29 @@
     failureFlash: true // allow flash messages
   }));
 
+  app.get('/cadastro/asinha/:id', isNotLoggedIn, function(req, res){
+    var message = '';
+    var id = req.params.id;
+
+    req.getConnection(function(err,connection){
+      connection.query("select * from schools where state_id = ?",[id], function(err,rows1)
+      {
+
+        connection.query("select * from districts", function(err,rows2)
+        {
+          if(err)
+            console.log("Error Selecting : %s ",err );
+            res.render('cadastroAsinha',{page_title:"sistema - Node.js", data_school:rows1, data_district:rows2});
+        });
+      });
+    });
+  });
+
+  app.post('/cadastro/asinha', passport.authenticate('local-signup-asinha', {
+    successRedirect: '/', 
+    failureRedirect: '/', 
+    failureFlash: true // allow flash messages
+  }));
 
 
   function isLoggedIn(req, res, next) {

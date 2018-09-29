@@ -7,6 +7,177 @@
  
 module.exports = function(app, passport) {
 
+
+  app.get('/escola/panel', isLoggedIn, function(req, res) {
+
+    req.getConnection(function (err,connection){
+      if(isTeacher(req,res))
+      {
+        var email = req.user.email;
+
+        connection.query('SELECT * FROM teachers WHERE email = ?', [email], function(err,rows){
+          var school_id = rows[0].school_id;
+          var principal = rows[0].principal;
+
+          if(principal)
+          {
+            connection.query('SELECT t.name AS teacher_name, t.id AS teacher_id, t.email, t.phone, t.cpf, t.subject, s.token, s.district_id, s.num_teachers, s.num_students, s.name AS school_name, s.id AS school_id, s.phone AS school_phone FROM teachers t JOIN schools s ON t.school_id = s.id WHERE t.school_id = ? and t.patrono = ?', [school_id, 0], function(err,rows_){
+             
+                if(err)
+                {
+                   console.log("Error Selecting : %s ", err );
+                }
+                else
+                {
+                  connection.query('SELECT * FROM patrono WHERE school_id = ?', [school_id], function(err,rows2){
+                     res.render('schoolPanel', {page_title:"sistema - Node.js", user:rows_, data:rows, patrono:rows2});
+                  });
+                }
+            }); 
+          }
+          else
+          {
+            console.log("nao autorizado");
+            res.redirect('/sistema');
+          }
+        });      
+      }
+      else
+      {
+        console.log("nao autorizado");
+        res.redirect('/sistema');
+      }
+    });
+
+  });
+
+
+  app.get('/patrono/accept/:id',isLoggedIn, function(req, res) {
+
+   var id = req.params.id;
+
+   req.getConnection(function (err, connection) {
+
+     if(!isStudent(req,res)){
+
+            connection.query("SELECT * FROM teachers WHERE id = ? ",[id], function(err, rows)
+            {
+              var name_teacher = rows[0].name;
+              var school_id    = rows[0].school_id;
+              connection.query("UPDATE teachers SET patrono = 1 WHERE id = ? ",[id], function(err, rows)
+              {
+                connection.query("UPDATE teachers SET patrono = 0 WHERE id != ? ",[id], function(err, rows)
+                {
+                  connection.query("UPDATE patrono SET name = '"+name_teacher+"' WHERE school_id = ? ",[school_id], function(err2, rows)
+                  {
+                    if(err2)
+                      console.log("Error : %s ",err2 );
+                    else
+                      console.log("professor adicionado como patrono");
+                  });
+                });
+              });
+            });
+
+        res.redirect('/escola/panel');
+    }
+    else
+    {
+      console.log("apenas admins podem aprovar");
+      res.redirect('/sistema');
+    }
+
+  });
+
+ });
+
+  app.post('/patrono/cadastro',isLoggedIn, function(req, res) {
+
+      var input = JSON.parse(JSON.stringify(req.body));
+
+      req.getConnection(function (err, connection) {
+        connection.query("SELECT school_id FROM teachers WHERE email = ? ",[req.user.email], function(err, rows)
+        {
+            var school_id = rows[0].school_id;
+
+            var data = {
+                name        : input.name,
+                description : input.description,
+                message     : input.message,
+                school_id   : school_id
+
+            };
+
+            connection.query("INSERT INTO patrono set ?",[data], function(err,rows1){
+              if(err)
+                  console.log("Error Selecting : %s ",err );
+                else
+            console.log("patrono cadastrada");
+
+                res.redirect('/escola/panel');
+              });
+        });
+      });
+    });
+
+  app.get('/patrono/edit/:id', function(req, res) {
+
+    var id = req.params.id;
+
+    req.getConnection(function (err, connection) {
+
+        if(!isStudent(req,res))
+        {
+          connection.query('SELECT p.id AS patrono_id, p.name AS patrono_name, p.description, p.message FROM patrono p JOIN teachers t ON p.school_id = t.school_id WHERE p.id = ? and (t.patrono = 1 or t.principal = 1)',[id],function(err,rows)
+          {
+            if(err)
+                console.log("Error Selecting : %s ",err );
+
+              res.render('patronoEdit',{page_title:"Edit sistema - Node.js",patrono:rows});
+            
+
+          });
+        }
+        else
+        {
+          console.log("admins, diretores e patronos editam patrono");
+          res.redirect('/sistema');
+        }
+
+    });
+
+  });
+
+    app.post('/patrono/edit/:id', function(req, res) {
+
+      var input = JSON.parse(JSON.stringify(req.body));
+      var id = req.params.id;
+
+      req.getConnection(function (err, connection) {
+
+        var data = {
+            name          : input.name,
+            description   : input.description,
+            message       : input.message
+        };
+        console.log(id)
+
+                    connection.query("UPDATE patrono SET ? WHERE id = ? ",[data,id], function(err2, rows) {
+                      console.log(rows)
+                        if (err2)
+                            console.log("Error Updating : %s ",err2 );
+                        else
+                          console.log("editado patrono por patrono");
+                        
+                        res.redirect('/sistema');
+                      });
+
+        
+    
+      });
+
+    });
+
     app.get('/escola/delete/:id', isLoggedIn, function(req, res) {
 
        var id = req.params.id;
@@ -211,6 +382,9 @@ module.exports = function(app, passport) {
         });
       });
     });
+
+
+
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated())

@@ -57,6 +57,7 @@
                       <h3>ADMIN PAINEL</h3>
                       
                       <div style="padding-top:30px" class="panel-body" >
+                        Professores
                         <table border="1" cellpadding="7" cellspacing="10">
                             <tr>
                                 <th width="100px">No</th>
@@ -88,6 +89,52 @@
                                 </td>
                                 <td>   
                                     <a class="a-inside delete" href="../admin/refuse/<%=user[i].id%>">desaprovar</a>
+                                   
+                                </td>
+                            </tr>
+                        <% }
+                        
+                         }else{ %>
+                             <tr>
+                                <td colspan="8">Sem pendencias</td>
+                             </tr>
+                        <% } %>
+                            
+                                          
+                            
+                        </table>
+
+
+                    </div>
+
+                    <div style="padding-top:30px" class="panel-body" >
+                        Asinhas
+                        <table border="1" cellpadding="7" cellspacing="10">
+                            <tr>
+                                <th width="100px">No</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>CPF</th>
+                                <th>Distrito</th>
+                            </tr>
+                                           
+                            <% if(asinha.length){ 
+                                            
+                             for(var i = 0;i < asinha.length;i++) { %>
+                             
+                            <tr>
+                                <td><%=(i+1)%></td>
+                                <td><%=asinha[i].name%></td>
+                                <td><%=asinha[i].email%></td>
+                                <td><%=asinha[i].phone%></td>
+                                <td><%=asinha[i].cpf%></td>
+                                <td><%=asinha[i].district_id%></td>
+                                <td>
+                                    <a class="a-inside edit" href="../admin/accept/<%=asinha[i].id%>">aprovar</a>
+                                </td>
+                                <td>   
+                                    <a class="a-inside delete" href="../admin/refuse/<%=asinha[i].id%>">desaprovar</a>
                                    
                                 </td>
                             </tr>

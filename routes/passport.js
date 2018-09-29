@@ -11,7 +11,7 @@ var pool = require('./mysql').pool;
 //var moment = require('moment'); 
 
 var mysql = require('mysql');
-
+/*
 var pool = mysql.createPool({
     connectionLimit : 100,
     host : 'us-cdbr-iron-east-01.cleardb.net',
@@ -19,7 +19,7 @@ var pool = mysql.createPool({
     password : '2d8c7b6b',
     database : 'heroku_77659378f7bfef1',
     debug : 'false'
-});
+});*/
 
 
 
@@ -131,6 +131,83 @@ module.exports = function(passport, parameters) {
           });
 
 		    });
+      }));
+
+  passport.use('local-signup-asinha', new LocalStrategy({
+      usernameField : 'email',
+      passwordField : 'password',
+      passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, email, password, done) {
+        process.nextTick(function(){
+          const input = req.body;//JSON.parse(JSON.stringify(req.body));
+
+          if(input.confirm!=input.password)
+          {
+            console.log("Senhas diferentes");
+            return done(null, false, req.flash('registerMessage', 'Passwords are not matching.'));
+          }
+
+          req.getConnection(function(err, connection){
+            connection.query("select * from users where email = ?",[input.email],function(err,rows){
+              if (err)
+              {
+                connection.release();
+                return done(err);
+              }
+
+              if (rows.length>0) {
+                console.log("Email ja usado");
+                connection.release();
+                return done(null, false, req.flash('registerMessage', 'Email já usado'));
+              }
+              else {
+
+                const newUserMysql = new Object();
+                newUserMysql.username = input.name;
+                newUserMysql.address  = input.address;
+                newUserMysql.phone    = input.phone;
+                newUserMysql.cpf      = input.cpf;
+                newUserMysql.schoolId = input.schoolId;
+                newUserMysql.district = input.district;
+                newUserMysql.password = input.password; 
+                newUserMysql.email    = input.email; 
+                newUserMysql.auth     = 0;
+                newUserMysql.type     = 3;
+
+
+                const insertUser = "insert into users (name, email, password, auth, type) values (?,?,?,?,?)";
+                connection.query(insertUser,[newUserMysql.username, newUserMysql.email, newUserMysql.password, newUserMysql.auth, newUserMysql.type],function(err,result){
+                  if (err)
+                  {
+                    connection.release();
+                    return done(err);
+                  }
+
+                  newUserMysql.id = result.insertId;
+                  console.log("deu bom");
+                  connection.release();
+                  return done(null, newUserMysql);
+                });
+
+                const insertAsinha = "insert into asinhas (name, address, phone, cpf, school_id, district_id, email, password) values (?,?,?,?,?,?,?,?)";
+                connection.query(insertAsinha,[newUserMysql.username, newUserMysql.address, newUserMysql.phone, newUserMysql.cpf, newUserMysql.schoolId, newUserMysql.district, newUserMysql.email, newUserMysql.password],function(err,result){
+                  if (err)
+                  {
+                    connection.release();
+                    return done(err);
+                  }
+                  console.log("deu bom pro asinha");
+                });
+
+
+              }
+
+            });
+
+          });
+
+        });
       }));
 
 
