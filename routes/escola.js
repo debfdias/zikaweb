@@ -19,10 +19,11 @@ module.exports = function(app, passport) {
           var school_id = rows[0].school_id;
           var principal = rows[0].principal;
 
+
           if(principal)
           {
-            connection.query('SELECT t.name AS teacher_name, t.id AS teacher_id, t.email, t.phone, t.cpf, t.subject, s.token, s.district_id, s.num_teachers, s.num_students, s.name AS school_name, s.id AS school_id, s.phone AS school_phone FROM teachers t JOIN schools s ON t.school_id = s.id WHERE t.school_id = ? and t.patrono = ?', [school_id, 0], function(err,rows_){
-             
+            connection.query('SELECT t.name AS teacher_name, t.id AS teacher_id, t.email, t.phone, t.cpf, t.subject, t.school_id, s.token, s.district_id, s.num_teachers, s.num_students, s.name AS school_name, s.id AS school_id, s.phone AS school_phone FROM teachers t JOIN schools s ON t.school_id = s.id WHERE t.school_id = ?', [school_id], function(err,rows_){
+            console.log(rows_)
                 if(err)
                 {
                    console.log("Error Selecting : %s ", err );

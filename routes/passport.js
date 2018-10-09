@@ -11,7 +11,7 @@ var pool = require('./mysql').pool;
 //var moment = require('moment'); 
 
 var mysql = require('mysql');
-/*
+
 var pool = mysql.createPool({
     connectionLimit : 100,
     host : 'us-cdbr-iron-east-01.cleardb.net',
@@ -19,7 +19,7 @@ var pool = mysql.createPool({
     password : '2d8c7b6b',
     database : 'heroku_77659378f7bfef1',
     debug : 'false'
-});*/
+});
 
 
 
@@ -175,6 +175,16 @@ module.exports = function(passport, parameters) {
                 newUserMysql.auth     = 0;
                 newUserMysql.type     = 3;
 
+                const insertAsinha = "insert into asinhas (name, address, cpf,  phone, school_id, district_id, email, password) values (?,?,?,?,?,?,?,?)";
+                connection.query(insertAsinha,[newUserMysql.username, newUserMysql.address,newUserMysql.cpf, newUserMysql.phone,  newUserMysql.schoolId, newUserMysql.district, newUserMysql.email, newUserMysql.password],function(err,result){
+                  if (err)
+                  {
+                    connection.release();
+                    return done(err);
+                  }
+                  console.log("deu bom pro asinha");
+                });
+
 
                 const insertUser = "insert into users (name, email, password, auth, type) values (?,?,?,?,?)";
                 connection.query(insertUser,[newUserMysql.username, newUserMysql.email, newUserMysql.password, newUserMysql.auth, newUserMysql.type],function(err,result){
@@ -188,16 +198,6 @@ module.exports = function(passport, parameters) {
                   console.log("deu bom");
                   connection.release();
                   return done(null, newUserMysql);
-                });
-
-                const insertAsinha = "insert into asinhas (name, address, phone, cpf, school_id, district_id, email, password) values (?,?,?,?,?,?,?,?)";
-                connection.query(insertAsinha,[newUserMysql.username, newUserMysql.address, newUserMysql.phone, newUserMysql.cpf, newUserMysql.schoolId, newUserMysql.district, newUserMysql.email, newUserMysql.password],function(err,result){
-                  if (err)
-                  {
-                    connection.release();
-                    return done(err);
-                  }
-                  console.log("deu bom pro asinha");
                 });
 
 

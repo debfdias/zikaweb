@@ -11,7 +11,7 @@
  		req.getConnection(function (err,connection){
  			if(isAdmin(req,res))
  			{
- 				connection.query('SELECT * FROM users WHERE auth = ? and type = ? ', [0, 2], function(err,rows_){
+ 				connection.query('SELECT * FROM users WHERE auth = ? and (type = ? or ?)', [0, 2, 3], function(err,rows_){
          var email  = '';
 
          if(rows_.length>0)
